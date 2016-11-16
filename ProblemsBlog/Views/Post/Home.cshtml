@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ProblemsBlog.Models.UserPost>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Home</title>
+</head>
+<body>
+
+    
+    
+    
+    @foreach (var item in Model) {
+       
+         <div class="text-center" style="margin: 20px">
+           
+             <h1>   @Html.DisplayFor(modelItem => item.PostTitle) </h1> <br> <hr>
+            
+            
+             <h3> Author: @Html.DisplayFor(modelItem => item.Author)|@Html.DisplayFor(modelItem => item.Time)</h3> 
+            
+            
+                <img src="/@Html.DisplayFor(modelItem => item.Image)" width="500" height="300"> <br>
+             
+           
+               
+        
+          
+          </div>
+     
+    }
+    
+
+</body>
+</html>
