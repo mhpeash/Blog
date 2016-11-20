@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using ProblemsBlog.Core.BLL;
 using ProblemsBlog.Models;
 using ProblemsBlog.Context;
 
@@ -14,15 +15,18 @@ namespace ProblemsBlog.Controllers
     public class PostController : Controller
     {
         private DatabaseContext db = new DatabaseContext();
+        private UserManager aManager=new UserManager();
 
     
-        public ActionResult Index()
-        {
-            return View(db.Post.ToList());
-        }
+        //public ActionResult Index()
+        //{
+        //    return View(db.Post.ToList());
+        //}
 
         public ActionResult Home()
         {
+           
+
             return View(db.Post.ToList());
         }
 
@@ -32,6 +36,7 @@ namespace ProblemsBlog.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             UserPost userpost = db.Post.Find(id);
             if (userpost == null)
             {

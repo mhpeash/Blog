@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using ProblemsBlog.Core.BLL;
 using ProblemsBlog.Models;
 using ProblemsBlog.Context;
@@ -132,37 +133,47 @@ namespace ProblemsBlog.Controllers
         [HttpPost]
         public ActionResult UserProfile(UserPost userPost, HttpPostedFileBase file)
         {
+            if (Session["UserId"] != null)
 
-            userPost.UserId = Convert.ToInt32(Session["UserId"]);
-            userPost.Time = DateTime.Now;
-            userPost.Author = Session["Author"].ToString();
-
-            if (file == null)
             {
-                userPost.Image = "Images/" + "logo.jpg";
+                userPost.UserId = Convert.ToInt32(Session["UserId"]);
+                userPost.Time = DateTime.Now;
+                userPost.Author = Session["Author"].ToString();
+
+                if (file == null)
+                {
+                    userPost.Image = "Images/" + "logo.jpg";
+                }
+                else
+                {
+                    string filename = System.IO.Path.GetFileName(file.FileName);
+
+                    /*Saving the file in server folder*/
+                    file.SaveAs(Server.MapPath("~/Images/" + filename));
+
+                    userPost.Image = "Images/" + filename;
+                }
+
+                if (ModelState.IsValid)
+                {
+                    db.Post.Add(userPost);
+                    db.SaveChanges();
+                    return RedirectToAction("UserProfile");
+                }
+
+                return View(userPost);
             }
-            else
-            {
-                string filename = System.IO.Path.GetFileName(file.FileName);
 
-                /*Saving the file in server folder*/
-                file.SaveAs(Server.MapPath("~/Images/" + filename));
-
-                userPost.Image = "Images/" + filename;
-            }
-
-            if (ModelState.IsValid)
-            {
-                db.Post.Add(userPost);
-                db.SaveChanges();
-                return RedirectToAction("UserProfile");
-            }
-
-            return View(userPost);
-
-
+            return RedirectToAction("Login");
         }
 
+
+        public ActionResult LogOut()
+        {
+            FormsAuthentication.SignOut();
+            Session.Abandon(); // it will clear the session at the end of request
+            return RedirectToAction("Login");
+        }
 
         // GET: /Registration/Edit/5
         public ActionResult Edit(int? id)

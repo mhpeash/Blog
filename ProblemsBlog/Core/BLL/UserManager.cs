@@ -21,5 +21,9 @@ namespace ProblemsBlog.Core.BLL
         {
             return gateway.GetAllPostbyUserID(userId);
         }
+
+      
+        
+        
     }
 }

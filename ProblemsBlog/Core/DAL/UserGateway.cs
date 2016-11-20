@@ -10,7 +10,7 @@ namespace ProblemsBlog.Core.DAL
     public class UserGateway
     {
 
-        private string connectionString = @"Data Source=DESKTOP-O8VU872\SQLEXPRESS;Initial Catalog=ProblemBlog;Integrated Security=true";
+        private string connectionString = @"Data Source=DESKTOP-1FDNDJJ\SQLEXPRESS;Initial Catalog=ProblemBlog;Integrated Security=true";
 
         public User GetAllUserInfo(int userId)
         {
@@ -80,6 +80,9 @@ namespace ProblemsBlog.Core.DAL
             return postList;
 
         }
+
+
+       
 
 
     }

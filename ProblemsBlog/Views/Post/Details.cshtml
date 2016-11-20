@@ -4,71 +4,46 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
+<link href="~/Content/blog-post.css" rel="stylesheet" />
+@*<link href="~/Content/bootstrap.css" rel="stylesheet" />*@
 <div>
-    <h4>UserPost</h4>
-	<hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.UserId)
-        </dt>
+    <div class="container">
+        <div class="row">
+            <!-- Blog Post Content Column -->
+            <div class="col-lg-8">
+                <!-- Blog Post -->
+                <!-- Title -->
+                <h1>@Html.DisplayFor(model => model.PostTitle)</h1>
+                <!-- Date/Time -->
+                <p><span class="glyphicon glyphicon-time"></span> প্রকাশিত হয়েছে- @Html.DisplayFor(model => model.Time)</p>
 
-        <dd>
-            @Html.DisplayFor(model => model.UserId)
-        </dd>
+                <hr>
+                <!-- Author -->
+                <p class="lead">লিখেছেন-@Html.DisplayFor(model => model.Author)</p>
+                <hr>
+                <!-- Preview Image -->
+                <img class="img-responsive" src="/@Html.DisplayFor(model => model.Image)" >
+                <hr>
+                <!-- Post Content -->
+                <p class="lead">
+                    @Html.DisplayFor(model => model.PostContent)
+                </p>
+                <hr>
+                <!-- Blog Comments -->
+                <!-- Comments Form -->
+                <div class="well">
+                    <h4>Leave a Comment:</h4>
+                    <form role="form">
+                        <div class="form-group">
+                            <textarea class="form-control" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+             
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PostContent)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PostContent)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PostTitle)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PostTitle)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Author)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Author)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Image)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Image)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Time)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Time)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Tempvalue)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Tempvalue)
-        </dd>
-
-    </dl>
+            </div>
+            <div class="col-lg-4"></div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.UserPostId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
