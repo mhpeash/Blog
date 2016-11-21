@@ -53,14 +53,22 @@ namespace ProblemsBlog.Controllers
         public ActionResult Create([Bind(Include = "UserId,Name,Email,UserName,Password,ConfirmPassword,Image,Location")] User user, HttpPostedFileBase file)
         {
 
+            if (file == null)
+            {
+                user.Image = "Images/" + "logo.jpg";
+            }
+        else
+            {
+                string filename = System.IO.Path.GetFileName(file.FileName);
 
+                /*Saving the file in server folder*/
+                file.SaveAs(Server.MapPath("~/Images/" + filename));
 
-            string filename = System.IO.Path.GetFileName(file.FileName);
+                user.Image = "Images/" + filename;
+                
+            }
 
-            /*Saving the file in server folder*/
-            file.SaveAs(Server.MapPath("~/Images/" + filename));
-
-            user.Image = "Images/" + filename;
+           
 
 
             if (ModelState.IsValid)
