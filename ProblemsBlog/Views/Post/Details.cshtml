@@ -1,4 +1,6 @@
-﻿@model ProblemsBlog.Models.UserPost
+﻿@*@model ProblemsBlog.Models.UserPost*@
+@model ProblemsBlog.Models.Comment
+@using ProblemsBlog.Models
 
 @{
     ViewBag.Title = "Details";
@@ -13,20 +15,26 @@
             <div class="col-lg-8">
                 <!-- Blog Post -->
                 <!-- Title -->
-                <h1>@Html.DisplayFor(model => model.PostTitle)</h1>
+                <h1>
+                    @*@Html.DisplayFor(model => model.PostTitle)*@
+                    @ViewBag.UserPost.PostTitle
+                </h1>
                 <!-- Date/Time -->
-                <p><span class="glyphicon glyphicon-time"></span> প্রকাশিত হয়েছে- @Html.DisplayFor(model => model.Time)</p>
+                <p><span class="glyphicon glyphicon-time"></span> প্রকাশিত হয়েছে- @ViewBag.UserPost.Time
+    @*@Html.DisplayFor(model => model.Time)*@</p>
 
                 <hr>
                 <!-- Author -->
-                <p class="lead">লিখেছেন-@Html.DisplayFor(model => model.Author)</p>
+                <p class="lead">লিখেছেন-@ViewBag.UserPost.Author
+    @*@Html.DisplayFor(model => model.Author)*@</p>
                 <hr>
                 <!-- Preview Image -->
-                <img class="img-responsive" src="/@Html.DisplayFor(model => model.Image)" >
+                @*@html.displayfor(model=> model.Image)*@
+                <img class="img-responsive" src="/@ViewBag.UserPost.Image">
                 <hr>
                 <!-- Post Content -->
                 <p class="lead">
-                    @Html.DisplayFor(model => model.PostContent)
+                    @ViewBag.UserPost.PostContent
                 </p>
                 <hr>
                 <!-- Blog Comments -->

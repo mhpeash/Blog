@@ -108,3 +108,6 @@ C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\bin\Microso
 C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\obj\Debug\ProblemsBlog.dll
 C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\obj\Debug\ProblemsBlog.pdb
 C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\obj\Debug\ProblemsBlog.csprojResolveAssemblyReference.cache
+C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\obj\Debug\ProblemsBlog.Migrations.InitialCreate.resources
+C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\obj\Debug\ProblemsBlog.csproj.GenerateResource.Cache
+C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\obj\Debug\ProblemsBlog.Migrations.commentclassadded.resources

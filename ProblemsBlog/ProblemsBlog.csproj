@@ -166,6 +166,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611161947449_InitialCreate.cs" />
+    <Compile Include="Migrations\201611161947449_InitialCreate.Designer.cs">
+      <DependentUpon>201611161947449_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611230805111_commentclassadded.cs" />
+    <Compile Include="Migrations\201611230805111_commentclassadded.Designer.cs">
+      <DependentUpon>201611230805111_commentclassadded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserPost.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -231,6 +241,14 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201611161947449_InitialCreate.resx">
+      <DependentUpon>201611161947449_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611230805111_commentclassadded.resx">
+      <DependentUpon>201611230805111_commentclassadded.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

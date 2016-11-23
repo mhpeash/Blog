@@ -41,7 +41,7 @@
                                     <hr>
                                     <img class="img-responsive" src="/@Html.DisplayFor(modelItem => item.Image)">
                                     <hr>
-                                    <p> @item.PostContent.Substring(0, 200)@Html.ActionLink("See More....", "Details", new { id = @Html.DisplayFor(modelItem => item.UserPostId) })</p>
+                                    <h4> @item.PostContent.Substring(0, 100)@Html.ActionLink("See More....", "Details", new { id = @Html.DisplayFor(modelItem => item.UserPostId) })</h4>
                                    
                                 </div>
                                 <div class="col-md-4"></div>

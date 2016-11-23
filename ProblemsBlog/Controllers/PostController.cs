@@ -37,15 +37,38 @@ namespace ProblemsBlog.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
+            Session["PostId"] = Convert.ToInt32(id);
             UserPost userpost = db.Post.Find(id);
             if (userpost == null)
             {
                 return HttpNotFound();
             }
-            return View(userpost);
+          
+            ViewBag.UserPost = userpost;
+
+            //return View(userpost);
+            return View();
         }
 
-      
+        [HttpPost]
+        public ActionResult Details(Comment aComment)
+        {
+            aComment.UserId = Convert.ToInt32(Session["UserId"]);
+            aComment.UserName = Session["Username"].ToString();
+            aComment.PostId = Convert.ToInt32(Session["PostId"]);
+                 if (ModelState.IsValid)
+                {
+                    db.Comments.Add(aComment);
+                    db.SaveChanges();
+                    return RedirectToAction("Details");
+                }
+
+                 return View(aComment);
+
+
+        }
+
+
 
         public ActionResult Edit(int? id)
         {
