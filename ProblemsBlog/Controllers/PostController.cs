@@ -46,15 +46,26 @@ namespace ProblemsBlog.Controllers
           
             ViewBag.UserPost = userpost;
 
+            //ViewData["AllComments"] = db.Comments.ToList();
+            ViewData["AllComments"] = db.Comments.Find(Session["PostId"]);
+
             //return View(userpost);
             return View();
         }
 
+       
+        //Single Content Details
+
         [HttpPost]
         public ActionResult Details(Comment aComment)
         {
+
+            if (Session["Author"] == null)
+            {
+                return RedirectToAction("Login","Registration");
+            }
             aComment.UserId = Convert.ToInt32(Session["UserId"]);
-            aComment.UserName = Session["Username"].ToString();
+            aComment.UserName = Session["Author"].ToString();
             aComment.PostId = Convert.ToInt32(Session["PostId"]);
                  if (ModelState.IsValid)
                 {
@@ -93,7 +104,7 @@ namespace ProblemsBlog.Controllers
             {
                 db.Entry(userpost).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("UserProfile","Registration");
             }
             return View(userpost);
         }

@@ -1,5 +1,8 @@
 ﻿@*@model ProblemsBlog.Models.UserPost*@
 @model ProblemsBlog.Models.Comment
+@*@using System.Threading*@
+@using System.Linq
+@using Microsoft.Ajax.Utilities
 @using ProblemsBlog.Models
 
 @{
@@ -41,17 +44,91 @@
                 <!-- Comments Form -->
                 <div class="well">
                     <h4>Leave a Comment:</h4>
-                    <form role="form">
+                    @*<form role="form">
                         <div class="form-group">
                             <textarea class="form-control" rows="3"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
-             
+                    </form>*@
+                    
+                    @using (Html.BeginForm())
+            {
+    @Html.AntiForgeryToken()
 
+    <div class="form-horizontal">
+       
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @*@Html.LabelFor(model => model.UserName, new { @class = "control-label col-md-6" })*@
+            @*<div class="col-md-6">*@
+            @Html.EditorFor(model => model.UserComment)
+            @Html.ValidationMessageFor(model => model.UserComment)
+        </div>
+        <div class="form-group">
+
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Publish" class="btn btn-Primary" />
             </div>
-            <div class="col-lg-4"></div>
+
+        </div>
+        </div>
+    
+            }
+
+
+
+
+
+
+
+    </div>
+
+
+            </div> @*end of first col*@
+
+            <div class="col-lg-4">
+               
+                @{ IEnumerable<Comment> allComments = ViewData["AllComments"] as IEnumerable<Comment>; }
+                
+                <h3>মতামত দিয়েছেন:</h3> <hr> 
+@if (allComments != null)
+{
+
+    foreach (Comment v in allComments)
+    {
+        
+
+        <div class="container">
+            <div class="row well-lg">
+                @*Commenter Name*@
+                <div class="col-sm-6">
+                    <h3>@v.UserName</h3>
+                </div>
+                @*Comments*@
+                <div class="col-sm-6">
+                    @v.UserComment 
+
+                </div>
+            </div>
+            <hr>
+        </div>
+
+       
+    }
+
+    Int32 a = allComments.Count(); 
+    <h2>মোট মন্তব্য করেছেনঃ@a জন </h2>
+    }
+
+     
+   
+
+                
+
+
+
+</div>
         </div>
     </div>
 </div>
