@@ -43,13 +43,8 @@
                 <!-- Blog Comments -->
                 <!-- Comments Form -->
                 <div class="well">
-                    <h4>Leave a Comment:</h4>
-                    @*<form role="form">
-                        <div class="form-group">
-                            <textarea class="form-control" rows="3"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>*@
+                    
+              
                     
                     @using (Html.BeginForm())
             {
@@ -61,13 +56,17 @@
 
         <div class="form-group">
             @*@Html.LabelFor(model => model.UserName, new { @class = "control-label col-md-6" })*@
-            @*<div class="col-md-6">*@
+            
+            <div class="control-label col-md-4"><h4>Leave a Comment:</h4></div>
+            <div class="col-md-8">
             @Html.EditorFor(model => model.UserComment)
             @Html.ValidationMessageFor(model => model.UserComment)
+            
+           </div>
         </div>
         <div class="form-group">
 
-            <div class="col-md-offset-2 col-md-10">
+            <div class="col-md-offset-5 col-md-7">
                 <input type="submit" value="Publish" class="btn btn-Primary" />
             </div>
 
@@ -75,11 +74,6 @@
         </div>
     
             }
-
-
-
-
-
 
 
     </div>

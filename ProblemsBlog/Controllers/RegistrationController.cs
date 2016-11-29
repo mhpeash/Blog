@@ -179,7 +179,13 @@ namespace ProblemsBlog.Controllers
         public ActionResult LogOut()
         {
             FormsAuthentication.SignOut();
-            Session.Abandon(); // it will clear the session at the end of request
+            
+            Session.Abandon();
+
+            HttpCookie aCookie = new HttpCookie(FormsAuthentication.FormsCookieName, "");
+            aCookie.Expires = DateTime.Now.AddMonths(-5);
+            Response.Cookies.Add(aCookie);
+
             return RedirectToAction("Login");
         }
 

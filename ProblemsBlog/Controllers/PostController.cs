@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -44,13 +45,17 @@ namespace ProblemsBlog.Controllers
                 return HttpNotFound();
             }
           
+            //send user basic info to profile
+
             ViewBag.UserPost = userpost;
 
-            //ViewData["AllComments"] = db.Comments.ToList();
-            ViewData["AllComments"] = db.Comments.Find(Session["PostId"]);
+            int postid = Convert.ToInt32(Session["PostId"]);
 
-            //return View(userpost);
-            return View();
+            //select all comments by postid
+
+            ViewData["AllComments"] = db.Comments.Where(p => p.PostId == postid);
+
+                 return View();
         }
 
        
@@ -132,7 +137,7 @@ namespace ProblemsBlog.Controllers
             UserPost userpost = db.Post.Find(id);
             db.Post.Remove(userpost);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Home");
         }
 
         protected override void Dispose(bool disposing)
