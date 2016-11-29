@@ -1,9 +1,12 @@
-﻿@*@model ProblemsBlog.Models.UserPost*@
+﻿
 @model ProblemsBlog.Models.Comment
-@*@using System.Threading*@
-@using System.Linq
-@using Microsoft.Ajax.Utilities
+
 @using ProblemsBlog.Models
+@{
+    IEnumerable<Comment> allComments = ViewData["AllComments"] as IEnumerable<Comment>;
+    Int32 a = allComments.Count();
+}
+
 
 @{
     ViewBag.Title = "Details";
@@ -80,48 +83,49 @@
 
 
             </div> @*end of first col*@
+           
 
             <div class="col-lg-4">
-               
-                @{ IEnumerable<Comment> allComments = ViewData["AllComments"] as IEnumerable<Comment>; }
-                
-                <h3>মতামত দিয়েছেন:</h3> <hr> 
+             
+    @*IEnumerable<Comment> allComments = ViewData["AllComments"] as IEnumerable<Comment>;}*@  
+                             
+                <h3>মতামত দিয়েছেন:@a জন </h3> <hr> 
 @if (allComments != null)
 {
 
     foreach (Comment v in allComments)
     {
         
-
         <div class="container">
+            
             <div class="row well-lg">
+                
                 @*Commenter Name*@
                 <div class="col-sm-6">
                     <h3>@v.UserName</h3>
                 </div>
+
                 @*Comments*@
+
                 <div class="col-sm-6">
                     @v.UserComment 
 
                 </div>
+
             </div>
             <hr>
-        </div>
+        </div> @*end foreach container*@
 
        
     }
 
-    Int32 a = allComments.Count(); 
-    <h2>মোট মন্তব্য করেছেনঃ@a জন </h2>
-    }
+    
 
-     
+    } @*end of commnts list*@
+
    
 
-                
-
-
-
+ 
 </div>
         </div>
     </div>

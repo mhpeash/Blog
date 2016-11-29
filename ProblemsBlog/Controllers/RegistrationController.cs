@@ -46,8 +46,7 @@ namespace ProblemsBlog.Controllers
         }
 
         // POST: /Registration/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+      
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "UserId,Name,Email,UserName,Password,ConfirmPassword,Image,Location")] User user, HttpPostedFileBase file)
@@ -55,7 +54,7 @@ namespace ProblemsBlog.Controllers
 
             if (file == null)
             {
-                user.Image = "Images/" + "logo.jpg";
+                user.Image = "Images/" + "icon.png";
             }
         else
             {
@@ -69,8 +68,6 @@ namespace ProblemsBlog.Controllers
             }
 
            
-
-
             if (ModelState.IsValid)
             {
                 db.Users.Add(user);
@@ -144,6 +141,17 @@ namespace ProblemsBlog.Controllers
             if (Session["UserId"] != null)
 
             {
+
+                //all user basic onfo
+                Models.User aUser = aManager.GetAllUserInfo(Convert.ToInt32(Session["UserId"]));
+                ViewBag.User = aUser;
+
+                // all status from user db
+                ViewData["AllStatus"] = aManager.GetAllPostbyUserID(Convert.ToInt32(Session["UserId"]));
+
+
+
+
                 userPost.UserId = Convert.ToInt32(Session["UserId"]);
                 userPost.Time = DateTime.Now;
                 userPost.Author = Session["Author"].ToString();
@@ -205,17 +213,25 @@ namespace ProblemsBlog.Controllers
         }
 
         // POST: /Registration/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+     
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="UserId,Name,Email,UserName,Password,ConfirmPassword,Image,Location")] User user)
+        public ActionResult Edit(User user, HttpPostedFileBase file)
         {
+            
+            string filename = System.IO.Path.GetFileName(file.FileName);
+
+            /*Saving the file in server folder*/
+            file.SaveAs(Server.MapPath("~/Images/" + filename));
+
+            user.Image = "Images/" + filename;
+            
+          
             if (ModelState.IsValid)
             {
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("UserProfile");
             }
             return View(user);
         }

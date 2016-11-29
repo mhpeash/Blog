@@ -18,17 +18,13 @@ namespace ProblemsBlog.Controllers
         private DatabaseContext db = new DatabaseContext();
         private UserManager aManager=new UserManager();
 
-    
-        //public ActionResult Index()
-        //{
-        //    return View(db.Post.ToList());
-        //}
+  
 
         public ActionResult Home()
         {
-           
+             return View(db.Post.OrderByDescending(x => x.Time).ToList());
 
-            return View(db.Post.ToList());
+            //return View(db.Post.ToList());
         }
 
         public ActionResult Details(int? id)
