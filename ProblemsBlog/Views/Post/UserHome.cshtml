@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<ProblemsBlog.Models.UserPost>
-     
+
 @{
     Layout = null;
 }
@@ -15,29 +15,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <style>
-        /*.navbar {
-            border: 0;
-            font-size: 15px !important;
-            line-height: 1.42857143 !important;
-            letter-spacing: 3px;
-            border-radius: 0;
-            font-family: Montserrat, sans-serif;
-        }
-
-            .navbar li a, .navbar .navbar-brand {
-                color: #fff !important;
-            }
-
-        .navbar-nav li a:hover, .navbar-nav li.active a {
-            color: black !important;
-            background-color: #E84C4C !important;
-        }
-
-        .navbar-inverse .navbar-toggle {
-            border-color: transparent;
-            color: #fff !important;
-            background-color: rgba(0, 0, 0, 0.8);
-        }*/
+        
         .navbar {
             margin-bottom: 0px;
             background-color: rgb(255,204,51);
@@ -51,7 +29,7 @@
         }
 
             .navbar li a, .navbar .navbar-brand {
-                color: #fff !important;
+                color: black !important;
             }
 
         .navbar-nav li a:hover, .navbar-nav li.active a {
@@ -64,7 +42,7 @@
             color: #fff !important;
         }
 
-   
+
 
         .jumbocontent {
             font-family: monospace Lucida;
@@ -75,7 +53,6 @@
         }
 
         .jumbotron {
-           
             background-color: white;
         }
 
@@ -90,15 +67,10 @@
             text-decoration: none;
         }
 
-        .btn-danger 
-        {
+        .btn-danger {
             color: white;
-            text-decoration: none;   
+            text-decoration: none;
         }
-
-    
-         
-    
     </style>
 
 
@@ -118,13 +90,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/Post/Home">POPS-Blog</a>
+                <a class="navbar-brand" href="/Post/UserHome">POPS-Blog</a>
             </div><!--end navheader-->
 
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/Registration/Create"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                    <li><a href="/Registration/Login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    
+                    <li><a href="/Registration/UserProfile"><span class="glyphicon glyphicon-home"></span>Profile</a> </li>
+                    <li><a href="/Registration/Logout"><span class="glyphicon glyphicon-log-out"></span>Logout|@Session["Username"]|</a></li>
                 </ul>
             </div><!--glyphicon divright-->
 
@@ -137,7 +110,7 @@
     </div>
 
     <div class="container" style="background-color:rgba(0,0,0,0.8);padding:80px;margin-top:30px">
-       
+
         @foreach (var item in Model)
         {
 
@@ -146,47 +119,48 @@
             <div class="row">
 
                 <div class="col-lg-5">
-                    <img src="/@Html.DisplayFor(modelItem => item.Image)" class="img-responsive  img-thumbnail"/>
+                    <img src="/@Html.DisplayFor(modelItem => item.Image)" class="img-responsive  img-thumbnail" />
                 </div>
 
                 <div class="col-lg-7 well" style="margin-top: 40px">
-                    <h3><a href="/Post/Details/@Html.DisplayFor(modelItem => item.UserPostId)" style="text-decoration: none; color: #313131">@Html.DisplayFor(modelItem => item.PostTitle)</a>
+                    <h3>
+                        <a href="/Post/Details/@Html.DisplayFor(modelItem => item.UserPostId)" style="text-decoration: none; color: #313131">@Html.DisplayFor(modelItem => item.PostTitle)</a>
                     </h3>
                     <br>
                     <span class="glyphicon glyphicon-user">@Html.DisplayFor(modelItem => item.Author)</span>
                     <span class="glyphicon glyphicon-time">@Html.DisplayFor(modelItem => item.Time)</span> <br>
-                    
+
 
                     <br>  <h4>@item.PostContent.Substring(0, 100)......</h4> <br>
                     <button type="button" class="btn btn-default">
-                      
-                            @Html.ActionLink("See More", "Details", new { id = @Html.DisplayFor(modelItem => item.UserPostId) })
 
-                    
+                        @Html.ActionLink("See More", "Details", new { id = @Html.DisplayFor(modelItem => item.UserPostId) })
+
+
                     </button>
 
-                    
+
                 </div>
 
 
             </div>
             <hr>
         }
-        
+
     </div>
 
-        
+
     <div class="container-fluid" style="padding:20px;background-color:#313131;color:#E84C4C;margin-top:100px">
         <footer>
-           <div class="container">
-             <div class="row">
-                <div class="col-sm-4"></div>
-                <div class="col-sm-4">
-                    <h4>All Right Reserved By 2016 <a href="https://mhpeash.github.io/Home.html">| mhpeash |</a> </h4>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-4">
+                        <h4>All Right Reserved By 2016 <a href="https://mhpeash.github.io/Home.html">| mhpeash |</a> </h4>
+                    </div>
+                    <div class="col-sm-4"></div>
                 </div>
-                <div class="col-sm-4"></div>
             </div>
-           </div>
 
         </footer>
 

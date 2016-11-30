@@ -24,9 +24,15 @@ namespace ProblemsBlog.Controllers
         {
              return View(db.Post.OrderByDescending(x => x.Time).ToList());
 
-            //return View(db.Post.ToList());
+         
         }
 
+        public ActionResult UserHome()
+        {
+            return View(db.Post.OrderByDescending(x => x.Time).ToList());
+        }
+
+        //Single PostDetails Details
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -55,7 +61,7 @@ namespace ProblemsBlog.Controllers
         }
 
        
-        //Single Content Details
+        //Single PostDetails Details
 
         [HttpPost]
         public ActionResult Details(Comment aComment)
@@ -68,7 +74,13 @@ namespace ProblemsBlog.Controllers
             aComment.UserId = Convert.ToInt32(Session["UserId"]);
             aComment.UserName = Session["Author"].ToString();
             aComment.PostId = Convert.ToInt32(Session["PostId"]);
-                 if (ModelState.IsValid)
+
+           // int a  = Convert.ToInt32(Session["UserId"]); 
+
+           //commenter picture
+            //db.Users.Where(b => b.Image ==a.ToString());
+
+                if (ModelState.IsValid)
                 {
                     db.Comments.Add(aComment);
                     db.SaveChanges();
