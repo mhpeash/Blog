@@ -24,7 +24,9 @@ namespace ProblemsBlog.Controllers
             return View(db.Users.ToList());
         }
 
-        // GET: /Registration/Details/5
+        
+        
+        //Single user information details
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -32,12 +34,17 @@ namespace ProblemsBlog.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             User user = db.Users.Find(id);
+
+            ViewData["TotalPost"] = db.Post.Where(b => b.UserId == id);
+         
             if (user == null)
             {
                 return HttpNotFound();
             }
             return View(user);
         }
+
+   
 
         // GET: /Registration/Create
         public ActionResult Create()

@@ -31,8 +31,8 @@
 
                 <hr>
                 <!-- Author -->
-                <p class="lead">লিখেছেন-@ViewBag.UserPost.Author
-    @*@Html.DisplayFor(model => model.Author)*@</p>
+                <p class="lead"> <a href="/Registration/Details/@ViewBag.UserPost.UserId" style="text-decoration: none">লিখেছেন-@ViewBag.UserPost.Author</a>
+    @*@Html.DisplayFor(model => model.Author)*@</p> 
                 <hr>
                 <!-- Preview Image -->
                 @*@html.displayfor(model=> model.Image)*@

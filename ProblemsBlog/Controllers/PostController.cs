@@ -41,7 +41,9 @@ namespace ProblemsBlog.Controllers
             }
 
             Session["PostId"] = Convert.ToInt32(id);
+
             UserPost userpost = db.Post.Find(id);
+
             if (userpost == null)
             {
                 return HttpNotFound();

@@ -1,74 +1,151 @@
 ﻿@model ProblemsBlog.Models.User
-
+@using ProblemsBlog.Models
 @{
-    ViewBag.Title = "Details";
+    //ViewBag.Title = "Details";
+    Layout = null;
 }
 
-<h2>Details</h2>
+@*@Html.DisplayFor(model => model.UserName)*@
+         
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>UserInfo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<div>
-    <h4>User</h4>
-	<hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+    <style>
+        #bg1 {
+            background-image: url("/Images/bg.jpg");
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            padding: 0px;
+            margin-top: 0px;
+        }
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+        #rowbg {
+            background-color: rgba(24,188,156,0.8);
+            height: 947px;
+            width: 100%;
+            margin: 0px;
+        }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
+        .well {
+            background-color: white;
+            margin-top: 120px;
+            letter-spacing: 1px;
+        }
 
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
+        .navbar {
+            border: 0;
+            font-size: 15px !important;
+            line-height: 1.42857143 !important;
+            letter-spacing: 3px;
+            border-radius: 0;
+            font-family: Montserrat, sans-serif;
+            
+        }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.UserName)
-        </dt>
+            .navbar li a, .navbar .navbar-brand {
+                color: #fff !important;
+            }
 
-        <dd>
-            @Html.DisplayFor(model => model.UserName)
-        </dd>
+        .navbar-nav li a:hover, .navbar-nav li.active a {
+            color: black !important;
+            background-color: #E84C4C !important;
+        }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
+        .navbar-inverse .navbar-toggle {
+            border-color: transparent;
+            color: #fff !important;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
 
-        <dd>
-            @Html.DisplayFor(model => model.Password)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ConfirmPassword)
-        </dt>
+        footer a:hover {
+            color: #ffd24d;
+            text-decoration: none;
+        }
+    </style>
+</head>
 
-        <dd>
-            @Html.DisplayFor(model => model.ConfirmPassword)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Image)
-        </dt>
+<body>
 
-        <dd>
-            @Html.DisplayFor(model => model.Image)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Location)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Location)
-        </dd>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.UserId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/Post/Home">POPS-Blog</a>
+            </div><!--end navheader-->
+
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/Register/Create"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    <li><a href="/Register/Login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                </ul>
+            </div><!--glyphicon divright-->
+
+        </div> <!--end header container-fluid-->
+    </nav>
+    
+    @{
+        IEnumerable<UserPost> totalPosts = ViewData["TotalPost"] as IEnumerable<UserPost>;
+        Int32 a = totalPosts.Count();
+         
+            }
+    
+    
+
+   
+    
+    
+    
+    
+
+    <div class="container-fluid" id="bg1">
+        <div id="rowbg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-8 well text-center">
+                        <img src="/@Html.DisplayFor(model => model.Image)" class="img-responsive img-thumbnail" width="300" height="280">
+                        <h1>@Html.DisplayFor(model => model.Name)</h1>
+                        <h2>From:@Html.DisplayFor(model => model.Location)</h2>
+                        <h2>Total Post:@a</h2>
+                        <h2>Contact:@Html.DisplayFor(model => model.Email)</h2>
+                    </div>
+                    <div class="col-lg-2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--........................................................................................footer section-->
+
+    <div class="container-fluid" style="padding:20px;background-color:#313131;color:#E84C4C">
+        <footer>
+            <div class="row">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4">
+                    <h4>All Right Reserved By 2016 <a href="https://mhpeash.github.io/Home.html">| mhpeash |</a> </h4>
+                </div>
+                <div class="col-sm-4"></div>
+            </div>
+
+
+        </footer>
+
+    </div>
+
+</body>
+</html>
