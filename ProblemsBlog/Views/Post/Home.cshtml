@@ -3,51 +3,31 @@
 @{
     Layout = null;
 }
-
+                   
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Home -POPS Blog</title>
+    <title>Home</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Rubik+Mono+One" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
     <style>
-        /*.navbar {
-            border: 0;
-            font-size: 15px !important;
-            line-height: 1.42857143 !important;
-            letter-spacing: 3px;
-            border-radius: 0;
-            font-family: Montserrat, sans-serif;
+        body {
+            background-color: #F2F2F2;
         }
 
-            .navbar li a, .navbar .navbar-brand {
-                color: #fff !important;
-            }
 
-        .navbar-nav li a:hover, .navbar-nav li.active a {
-            color: black !important;
-            background-color: #E84C4C !important;
-        }
-
-        .navbar-inverse .navbar-toggle {
-            border-color: transparent;
-            color: #fff !important;
-            background-color: rgba(0, 0, 0, 0.8);
-        }*/
         .navbar {
-            margin-bottom: 0px;
-            background-color: rgb(255,204,51);
-            z-index: 9999;
             border: 0;
             font-size: 15px !important;
             line-height: 1.42857143 !important;
             letter-spacing: 3px;
             border-radius: 0;
             font-family: Montserrat, sans-serif;
+            background-color: #ffd24d;
         }
 
             .navbar li a, .navbar .navbar-brand {
@@ -56,7 +36,7 @@
 
         .navbar-nav li a:hover, .navbar-nav li.active a {
             color: black !important;
-            background-color: #fff !important;
+            background-color: white !important;
         }
 
         .navbar-inverse .navbar-toggle {
@@ -64,7 +44,6 @@
             color: #fff !important;
         }
 
-   
 
         .jumbocontent {
             font-family: monospace Lucida;
@@ -75,13 +54,15 @@
         }
 
         .jumbotron {
-           
-            background-color: white;
+            background-color: #ffd24d;
+            color: white;
         }
 
-        .glyphicon {
-            font-size: 20px;
-            padding: 2px;
+        .row .glyphicon {
+            font-size: 15px;
+            padding-left: 8px;
+            padding-right: 8px;
+            color: gray;
         }
 
 
@@ -90,26 +71,29 @@
             text-decoration: none;
         }
 
-        .btn-danger 
-        {
-            color: white;
-            text-decoration: none;   
+
+        #titlefont {
+            font-family: 'Rubik Mono One',sans-serif;
+            padding-bottom: 20px;
+            letter-spacing: 1px;
         }
 
-    
-         
-    
+        .well {
+            background-color: #FFFFFF;
+            border: 1px solid #FFFFFF;
+        }
+
+        .btn a {
+            color: white;
+            text-decoration: none;
+            
+        }
     </style>
-
-
 
 </head>
 
 
-
-
 <body>
-
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -118,81 +102,70 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/Post/Home">POPS-Blog</a>
+                <a class="navbar-brand" href="#">POPS-Blog</a>
             </div><!--end navheader-->
-
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="/Registration/Create"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
                     <li><a href="/Registration/Login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                 </ul>
             </div><!--glyphicon divright-->
-
         </div> <!--end header container-fluid-->
     </nav>
-
     <div class="container-fluid jumbocontent" style="padding:0px">
-        <div class="jumbotron"><h1>PO<span style="color: #E84C4C">PS BL</span>OG</h1></div>
-        <hr>
+        <div class="jumbotron"><h1>ডাইরি</h1></div>
     </div>
 
-    <div class="container" style="background-color:rgba(0,0,0,0.8);padding:80px;margin-top:30px">
-       
-        @foreach (var item in Model)
-        {
+    <div class="container" style="margin-top:30px;margin-bottom: 30px">
+        
+    
+   
 
 
+        <div class="row well">
+            <div class="col-sm-8" style="border-right: 1px groove gray">
+                @foreach (var item in Model)
+                {
 
-            <div class="row">
-
-                <div class="col-lg-5">
-                    <img src="/@Html.DisplayFor(modelItem => item.Image)" class="img-responsive  img-thumbnail"/>
+                <div id="titlefont">
+                    <h1><a href="/Post/Details/@Html.DisplayFor(modelItem => item.UserPostId)" style="text-decoration: none; color: #313131">@Html.DisplayFor(modelItem => item.PostTitle)</a>
+                    </h1>
                 </div>
-
-                <div class="col-lg-7 well" style="margin-top: 40px">
-                    <h3><a href="/Post/Details/@Html.DisplayFor(modelItem => item.UserPostId)" style="text-decoration: none; color: #313131">@Html.DisplayFor(modelItem => item.PostTitle)</a>
-                    </h3>
-                    <br>
-                    <span class="glyphicon glyphicon-user">@Html.DisplayFor(modelItem => item.Author)</span>
-                    <span class="glyphicon glyphicon-time">@Html.DisplayFor(modelItem => item.Time)</span> <br>
-                    
-
-                    <br>  <h4>@item.PostContent.Substring(0, 100)......</h4> <br>
-                    <button type="button" class="btn btn-default">
-                      
-                            @Html.ActionLink("See More", "Details", new { id = @Html.DisplayFor(modelItem => item.UserPostId) })
-
-                    
-                    </button>
-
-                    
+                <p style="color: gray; font-size: 18px; margin-top: 20px">
+                    <span class="glyphicon glyphicon-user"></span>@Html.DisplayFor(modelItem => item.Author)
+                    <span class="glyphicon glyphicon-time"></span>@Html.DisplayFor(modelItem => item.Time)
+                    <span class="glyphicon glyphicon-comment"></span>Comment
+                </p>
+                <div style="margin-bottom: 30px">
+                    <img src="/@Html.DisplayFor(modelItem => item.Image)" class="img-responsive" width="650" height="230">
                 </div>
+                    <h4>@item.PostContent.Substring(0, 100)......<button type="button" class="btn btn-danger right">@Html.ActionLink("See More", "Details", new { id = @Html.DisplayFor(modelItem => item.UserPostId) })</button>
 
+                </h4>
 
+                <hr>
+                }       
             </div>
-            <hr>
-        }
-        
-    </div>
+             
+            <div class="col-sm-4">
+                <h3>Latest Post </h3><hr>
+            </div>
 
-        
+        </div>
+     </div> <!--end content container-->
+
     <div class="container-fluid" style="padding:20px;background-color:#313131;color:#E84C4C;margin-top:100px">
         <footer>
-           <div class="container">
-             <div class="row">
+            <div class="row">
                 <div class="col-sm-4"></div>
                 <div class="col-sm-4">
                     <h4>All Right Reserved By 2016 <a href="https://mhpeash.github.io/Home.html">| mhpeash |</a> </h4>
                 </div>
                 <div class="col-sm-4"></div>
             </div>
-           </div>
 
         </footer>
-
     </div>
-
-
 
 </body>
 </html>
