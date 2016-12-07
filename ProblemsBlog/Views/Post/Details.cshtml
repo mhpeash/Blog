@@ -7,7 +7,7 @@
     Int32 a = allComments.Count();
 }
 
-
+@*@{ IEnumerable<User> aUser = ViewData["CommentImage"] as IEnumerable<User>;}*@
 @{
     ViewBag.Title = "Details";
 }
@@ -101,15 +101,24 @@
             <div class="row well-lg">
                 
                 @*Commenter Name*@
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <h3>@v.UserName</h3>
                 </div>
 
                 @*Comments*@
 
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     @v.UserComment 
 
+                </div>
+                <div class="col-sm-4">
+                    @*@if (aUser != null)
+{
+    foreach (var user in aUser)
+    {
+        <img src="@user.Image" class="img-responsive img-rounded" width="150" height="100" />
+    }
+}*@
                 </div>
 
             </div>

@@ -1,10 +1,11 @@
 ﻿@model ProblemsBlog.Models.User
 
 @{
-    ViewBag.Title = "Registration";
+    //ViewBag.Title = "Registration";
+    Layout = null;
 }
 
-<div class="container">
+@*<div class="container">
 
     <div class="row" style="padding: 25px">
 
@@ -14,86 +15,251 @@
 
         <div class="col-sm-7">
 
-            <h2>নিবন্ধন করুন </h2>
-
-            @using (Html.BeginForm("Create", "Registration", FormMethod.Post, new { enctype = "multipart/form-data" }))
-            {
-                @Html.AntiForgeryToken()
-
-                <div class="form-horizontal">
-
-                    <hr />
-                    @Html.ValidationSummary(true)
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-6" })
-                        <div class="col-md-6">
-                            @Html.EditorFor(model => model.Name)
-                            @Html.ValidationMessageFor(model => model.Name)
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-6" })
-                        <div class="col-md-6">
-                            @Html.EditorFor(model => model.Email)
-                            @Html.ValidationMessageFor(model => model.Email)
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.UserName, new { @class = "control-label col-md-6" })
-                        <div class="col-md-6">
-                            @Html.EditorFor(model => model.UserName)
-                            @Html.ValidationMessageFor(model => model.UserName)
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Password, new { @class = "control-label col-md-6" })
-                        <div class="col-md-6">
-                            @Html.EditorFor(model => model.Password)
-                            @Html.ValidationMessageFor(model => model.Password)
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.ConfirmPassword, new { @class = "control-label col-md-6" })
-                        <div class="col-md-6">
-                            @Html.EditorFor(model => model.ConfirmPassword)
-                            @Html.ValidationMessageFor(model => model.ConfirmPassword)
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Image, new { @class = "control-label col-md-6" })
-                        <div class="col-md-6">
-                            <input type="file" name="file" />&nbsp;&nbsp;&nbsp; @ViewBag.Message
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Location, new { @class = "control-label col-md-6" })
-                        <div class="col-md-6">
-                            @Html.EditorFor(model => model.Location)
-                            @Html.ValidationMessageFor(model => model.Location)
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-md-offset-8 col-md-4">
-                            <input type="submit" value="Create" class="btn btn-success" />
-                        </div>
-                    </div>
-                </div>
-            }
 
         </div>
     </div>
     <div style="text-decoration-blink:inherit"> *Image should be less than 2mB</div>
+</div>*@
+
+
+
+
+
+
+
+    
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login-Hekkur|Diary</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style>
+        #bg1 {
+            background-image: url("/Images/1.6.jpg");
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            padding: 0px;
+            margin-top: 0px;
+        }
+
+        #rowbg {
+           
+            background-color: rgba(0,0,0,0.5);
+            height: 947px;
+            width: 100%;
+            margin: 0px;
+        }
+
+        .well {
+            background-color: white;
+            margin-top: 120px;
+            letter-spacing: 1px;
+        }
+
+        .navbar {
+            border: 0;
+            font-size: 15px !important;
+            line-height: 1.42857143 !important;
+            letter-spacing: 3px;
+            border-radius: 0;
+            font-family: Montserrat, sans-serif;
+            background-color: rgb(255,204,51);
+        }
+
+            .navbar li a, .navbar .navbar-brand {
+                color: #fff !important;
+            }
+
+        .navbar-nav li a:hover, .navbar-nav li.active a {
+            color: black !important;
+            background-color: white !important;
+        }
+
+        .navbar-inverse .navbar-toggle {
+            border-color: transparent;
+            color: #fff !important;
+            background-color: rgb(255,204,51);
+        }
+
+
+        footer a:hover {
+            color: #ffd24d;
+            text-decoration: none;
+        }
+
+        .control-label {
+            color: white;
+        
+
+        text-danger{
+            color: rgb(24,188,156);
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/Post/Home">POPS-Blog</a>
+            </div><!--end navheader-->
+
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/Registration/Create"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    <li><a href="/Registration/Login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                </ul>
+            </div><!--glyphicon divright-->
+
+        </div> <!--end header container-fluid-->
+    </nav>
+
+    <div class="container-fluid" id="bg1">
+    <div id="rowbg">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4" style="margin-top: 200px">
+                    <h2 style="color: white">নিবন্ধন করুন </h2>
+
+                    @using (Html.BeginForm("Create", "Registration", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+
+                            <hr />
+                            @Html.ValidationSummary(true)
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-6" })
+                                <div class="col-md-6">
+                                    @Html.EditorFor(model => model.Name)
+                                    @Html.ValidationMessageFor(model => model.Name)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-6" })
+                                <div class="col-md-6">
+                                    @Html.EditorFor(model => model.Email)
+                                    @Html.ValidationMessageFor(model => model.Email)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.UserName, new { @class = "control-label col-md-6" })
+                                <div class="col-md-6">
+                                    @Html.EditorFor(model => model.UserName)
+                                    @Html.ValidationMessageFor(model => model.UserName)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Password, new { @class = "control-label col-md-6" })
+                                <div class="col-md-6">
+                                    @Html.EditorFor(model => model.Password)
+                                <span style=" color: rgb(24,188,156)">    @Html.ValidationMessageFor(model => model.Password)</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ConfirmPassword, new { @class = "control-label col-md-6" })
+                                <div class="col-md-6">
+                                    @Html.EditorFor(model => model.ConfirmPassword)
+                                    <span style=" color: rgb(24,188,156)">  @Html.ValidationMessageFor(model => model.ConfirmPassword)</span>
 </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Image, new { @class = "control-label col-md-6" })
+                                <div class="col-md-6">
+                                    <input type="file" name="file" />&nbsp;&nbsp;&nbsp; @ViewBag.Message
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Location, new { @class = "control-label col-md-6" })
+                                <div class="col-md-6">
+                                    @Html.EditorFor(model => model.Location)
+                                  <<span style=" color: rgb(24,188,156)"> @Html.ValidationMessageFor(model => model.Location)</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-8 col-md-4">
+                                    <input type="submit" value="Create Account" class="btn btn-warning" />
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                        
+                        
+
+                </div>
+                <div class="col-sm-4"></div>
+            </div>
+        </div>
+    </div>
+</div>
+    <!--........................................................................................footer section-->
 
 
-@section Scripts {
+
+    <div class="container-fluid" style="padding:20px;background-color:#313131;color:#E84C4C">
+        <footer>
+            <div class="row">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4 text-center">
+                    <h4>All Right Reserved By 2016 <a href="https://mhpeash.github.io/Home.html">| mhpeash |</a> </h4>
+                </div>
+                <div class="col-sm-4"></div>
+            </div>
+
+
+        </footer>
+
+    </div>
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*@section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-}
+}*@

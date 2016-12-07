@@ -101,7 +101,7 @@
             background-color: rgb(255,204,51);
             color: white;
             min-width: 150px;
-            // box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            /*// box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);*/
         }
 
             .dropdown-content a {
@@ -145,16 +145,16 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a href="#" class="dropbtn">
-                            <span class="glyphicon glyphicon-wrench"></span>Settings
+                            <span class="glyphicon glyphicon-wrench"></span>Change-Password
                         </a>
                         <div class="dropdown-content">
-                            <a href="#">Edit Info</a>
+                            <a href="/Registration/Edit/@Session["UserId"]">Edit Info</a>
                             <a href="#">Change Coverphoto</a>
                             <a href="#">Change ProfilePicture</a>
                         </div>
                     </li>
                     <li><a href="#"><span class="glyphicon glyphicon-send"></span>Contact-Admin</a></li>
-                    <li><a href="#"> <span class="glyphicon glyphicon-cog"></span>Change-Password</a></li>
+                    @*<li><a href="#"> <span class="glyphicon glyphicon-cog"></span>Change-Password</a></li>*@
                     <li><a href="/Registration/Logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
 
                 </ul>
@@ -172,7 +172,7 @@
     <div class="container">
         <div class="row well" style="margin-top:-750px">
             <div class="col-sm-4">
-                <img src="/@ViewBag.User.Image" class="img-responsive img-circle" height="250" width="250"/>
+                <img src="/@ViewBag.User.Image" class="img-responsive img-thumbnail" height="250" width="250" />
             </div>
             <div class="col-sm-4"></div>
             <div class="col-sm-4">
@@ -186,57 +186,68 @@
 
     </div>
     @*----------------------------------------------------------------*@
-    <span style="text-align:center;font-size:20px ">আপনার লেখা প্রকাশ করুন </span>
+    
+    
+    
+    <div class="container">
+        <span style="text-align:center;font-size:20px ">আপনার লেখা প্রকাশ করুন </span>
+        <div class="row">
+            <div class="col-sm-8 well">
+                @using (Html.BeginForm("UserProfile", "Registration", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
 
-    @using (Html.BeginForm("UserProfile", "Registration", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="form-horizontal">
-            <hr />
-            @Html.ValidationSummary(true)
+                    <div class="form-horizontal">
+                        <hr />
+                        @Html.ValidationSummary(true)
 
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.PostTitle, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.PostTitle)
-                    @Html.ValidationMessageFor(model => model.PostTitle)
-                </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.PostTitle, new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.PostTitle)
+                                @Html.ValidationMessageFor(model => model.PostTitle)
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.PostContent, new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.PostContent, new { @class = "contfor" })
+
+                                @Html.ValidationMessageFor(model => model.PostContent)
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+
+                            @Html.LabelFor(model => model.Image, new { @class = "control-label col-md-2" })
+
+                            <div class="col-md-10">
+                                <input type="file" name="file" />&nbsp;&nbsp;&nbsp;
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Publish" class="btn btn-default" />
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                }
+ 
             </div>
-
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.PostContent, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.PostContent, new { @class = "contfor" })
-                    
-                    @Html.ValidationMessageFor(model => model.PostContent)
-                </div>
-            </div>
-
-
-            <div class="form-group">
-
-                @Html.LabelFor(model => model.Image, new { @class = "control-label col-md-2" })
-
-                <div class="col-md-10">
-                    <input type="file" name="file" />&nbsp;&nbsp;&nbsp;
-                </div>
-
-            </div>
-
-            <div class="form-group">
-
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Publish" class="btn btn-default" />
-                </div>
-
-            </div>
-
+            <div class="col-sm-4"> </div>
         </div>
+    </div>
 
-    }
     @*----------------------------------------------------------------*@
     
     
@@ -245,7 +256,7 @@
     
     
 
-    @*-----------------------show all post ousers--------------------------*@
+    @*-----------------------show all post of users--------------------------*@
    
     <div class="container">
         @if (status != null)
@@ -255,7 +266,7 @@
             {
                 <div class="row well">
                     <div class="col-sm-9">
-                        <h3>@v.PostTitle</h3> <br>
+                        <a href="/Post/UserSinglePostDetails/@v.UserPostId" style="text-decoration: none"> <h3>@v.PostTitle</h3></a> <br>
                         <p><span class="glyphicon glyphicon-time"></span> প্রকাশিত হয়েছে: @v.Time </p>
                         <hr>
                         <img class="img-responsive" src="/@v.Image" /> <br>

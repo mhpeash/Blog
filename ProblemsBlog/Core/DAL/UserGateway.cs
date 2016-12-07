@@ -71,6 +71,7 @@ namespace ProblemsBlog.Core.DAL
                 aPost.Time = Convert.ToDateTime(reader["Time"].ToString());
                 aPost.Author = reader["Author"].ToString();
                 aPost.PostTitle = reader["PostTitle"].ToString();
+                aPost.UserPostId = Convert.ToInt32(reader["UserPostId"]);
 
                 postList.Add(aPost);
 

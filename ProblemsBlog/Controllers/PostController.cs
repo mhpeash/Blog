@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -58,6 +59,12 @@ namespace ProblemsBlog.Controllers
             //select all comments by postid
 
             ViewData["AllComments"] = db.Comments.Where(p => p.PostId == postid);
+            //commenter picture
+
+            //int a = Convert.ToInt32(Session["UserId"]);
+            //ViewData["CommentImage"] = db.Users.Where(b => b.Image == a.ToString(CultureInfo.InvariantCulture));
+
+
 
                  return View();
         }
@@ -77,11 +84,12 @@ namespace ProblemsBlog.Controllers
             aComment.UserName = Session["Author"].ToString();
             aComment.PostId = Convert.ToInt32(Session["PostId"]);
 
-           // int a  = Convert.ToInt32(Session["UserId"]); 
+            //int a = Convert.ToInt32(Session["UserId"]);
 
-           //commenter picture
-            //db.Users.Where(b => b.Image ==a.ToString());
+            ////commenter picture
+            //ViewData["CommentImage"] = db.Users.Where(b => b.Image == a.ToString());
 
+           
                 if (ModelState.IsValid)
                 {
                     db.Comments.Add(aComment);
@@ -94,6 +102,68 @@ namespace ProblemsBlog.Controllers
 
         }
 
+        public ActionResult UserSinglePostDetails( int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Session["PostId"] = Convert.ToInt32(id);
+
+            UserPost userpost = db.Post.Find(id);
+
+            if (userpost == null)
+            {
+                return HttpNotFound();
+            }
+
+            //send user basic info to profile
+
+            ViewBag.UserPost = userpost;
+
+            int postid = Convert.ToInt32(Session["PostId"]);
+
+            //select all comments by postid
+
+            ViewData["AllComments"] = db.Comments.Where(p => p.PostId == postid);
+            //commenter picture
+
+            //int a = Convert.ToInt32(Session["UserId"]); 
+            //ViewData["CommentImage"] = db.Users.Where(b => b.Image == a.ToString());
+
+
+            return View();
+
+        }
+        
+        [HttpPost]
+        public ActionResult UserSinglePostDetails(Comment aComment)
+        {
+
+
+            if (Session["Author"] == null)
+            {
+                return RedirectToAction("Login", "Registration");
+            }
+            aComment.UserId = Convert.ToInt32(Session["UserId"]);
+            aComment.UserName = Session["Author"].ToString();
+            aComment.PostId = Convert.ToInt32(Session["PostId"]);
+
+           //  int a  = Convert.ToInt32(Session["UserId"]); 
+
+           // //commenter picture
+           //ViewData["CommentImage"]= db.Users.Where(b => b.Image ==a.ToString());
+
+            if (ModelState.IsValid)
+            {
+                db.Comments.Add(aComment);
+                db.SaveChanges();
+                return RedirectToAction("UserSinglePostDetails");
+            }
+
+            return View(aComment);
+        }
 
 
         public ActionResult Edit(int? id)
