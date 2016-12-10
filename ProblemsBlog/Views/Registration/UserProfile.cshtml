@@ -119,9 +119,13 @@
         .dropdown:hover .dropdown-content {
             display: block;
         }
-        .contfor {
-            width:100px;
-            height:5px;
+        .control-label {
+            font-size: 18px;
+            margin-top: 5px;
+        }
+
+        #posttextbar {
+            margin-top: 15px;
         }
     </style>
 
@@ -155,7 +159,7 @@
                     </li>
                     <li><a href="#"><span class="glyphicon glyphicon-send"></span>Contact-Admin</a></li>
                     @*<li><a href="#"> <span class="glyphicon glyphicon-cog"></span>Change-Password</a></li>*@
-                    <li><a href="/Registration/Logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+                    <li><a href="/Registration/Logout"><span class="glyphicon glyphicon-log-out"></span>Logout|@Session["UserName"]</a></li>
 
                 </ul>
             </div><!--glyphicon divright-->
@@ -164,15 +168,13 @@
     </nav>
     <!--  <div class="container-fluid" style="background-color:#313131;height:80px"></div>-->
 
-    <div class="container-fluid" id="coverphoto" style="height:950px;margin-top:30px;padding:0px"></div>
-
-
+    <div class="container-fluid" id="coverphoto" style="height:950px;padding:0px"></div>
 
 
     <div class="container">
         <div class="row well" style="margin-top:-750px">
             <div class="col-sm-4">
-                <img src="/@ViewBag.User.Image" class="img-responsive img-thumbnail" height="250" width="250" />
+                <img src="/@ViewBag.User.Image" class="img-circle" height="300" width="300" style="border-radius: 60%" />
             </div>
             <div class="col-sm-4"></div>
             <div class="col-sm-4">
@@ -189,33 +191,35 @@
     
     
     
-    <div class="container">
-        <span style="text-align:center;font-size:20px ">আপনার লেখা প্রকাশ করুন </span>
+    <div class="container" style="margin-top: -300px">
+        
         <div class="row">
             <div class="col-sm-8 well">
+                <h2>Express Your Mind..</h2>
                 @using (Html.BeginForm("UserProfile", "Registration", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
                     @Html.AntiForgeryToken()
 
-                    <div class="form-horizontal">
+                    <div class="form-horizontal" style="padding: 22px">
                         <hr />
                         @Html.ValidationSummary(true)
 
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.PostTitle, new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.PostTitle)
+                            @Html.LabelFor(model => model.PostTitle, new { @class = "control-label col-md-4" })
+                            <div class="col-md-8" id="posttextbar">
+                                @*@Html.EditorFor(model => model.PostTitle)*@
+                                @Html.TextBoxFor(model => model.PostTitle, new { style = "width: 350px" })
                                 @Html.ValidationMessageFor(model => model.PostTitle)
                             </div>
                         </div>
 
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.PostContent, new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.PostContent, new { @class = "contfor" })
-
+                            @Html.LabelFor(model => model.PostContent, new { @class = "control-label col-md-4" })
+                            <div class="col-md-8" id=" posttextbar">
+                                @*@Html.EditorFor(model => model.PostContent)*@
+                                @Html.TextAreaFor(model => model.PostContent, new { style = "width: 350px;height:180px" })
                                 @Html.ValidationMessageFor(model => model.PostContent)
                             </div>
                         </div>
@@ -223,9 +227,9 @@
 
                         <div class="form-group">
 
-                            @Html.LabelFor(model => model.Image, new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.Image, new { @class = "control-label col-md-4" })
 
-                            <div class="col-md-10">
+                            <div class="col-md-8" id="posttextbar">
                                 <input type="file" name="file" />&nbsp;&nbsp;&nbsp;
                             </div>
 
@@ -233,7 +237,7 @@
 
                         <div class="form-group">
 
-                            <div class="col-md-offset-2 col-md-10">
+                            <div class="col-md-offset-4 col-md-8">
                                 <input type="submit" value="Publish" class="btn btn-default" />
                             </div>
 
@@ -244,7 +248,26 @@
                 }
  
             </div>
-            <div class="col-sm-4"> </div>
+            <div class="col-sm-4 well " style="padding-left: 50px;border-left:2px solid black">
+                <h3>Latest Post</h3>
+                
+                @{ IEnumerable<UserPost> value = ViewData["LatestPost"] as IEnumerable<UserPost>;}
+
+
+                @if (value != null)
+                {
+                    foreach (var latestpost in value)
+                    {  <div class="well-sm">
+
+
+                        <img src="/@latestpost.Image" class="img-circle" width="100" height="100" style="border-radius: 60%" />
+                        @latestpost.PostTitle<hr>
+                    </div>
+                    }
+                }
+
+                 
+            </div>
         </div>
     </div>
 
@@ -270,12 +293,15 @@
                         <p><span class="glyphicon glyphicon-time"></span> প্রকাশিত হয়েছে: @v.Time </p>
                         <hr>
                         <img class="img-responsive" src="/@v.Image" /> <br>
-                        <h4>লিখেছেনঃ@v.Author <br></h4>
+                        <h4>Writer:@v.Author <br></h4>
                         @v.PostContent <br>
-
+                        
                     </div>
+                   
 
-                    <div class="col-sm-3"></div>
+                    <div class="col-sm-3">
+                        <a href="/Post/DeletePost/@v.UserPostId" style="border: 1px solid black;float: right;padding:10px; margin-top: 10px;text-decoration: none"> Delete Post</a>
+                    </div>
                 </div>
 
 
@@ -285,6 +311,19 @@
     </div>
 
     @*--------------------------end all post here---------------------------*@
+    
+    
+   
+
+       
+   
+    
+    
+    
+    
+    
+    
+    
 
     <div class="container-fluid" style="padding:20px;background-color:#313131;color:#E84C4C">
         <footer>

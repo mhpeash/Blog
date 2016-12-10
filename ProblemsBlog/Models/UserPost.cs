@@ -12,7 +12,7 @@ namespace ProblemsBlog.Models
         public int UserId { get; set; }
 
         [DataType(DataType.MultilineText)]
-        [StringLength(10000, ErrorMessage = " আপনার লেখাতে অন্তত ২০টি শব্দ থাকতে হবে  ", MinimumLength = 30)]
+        [StringLength(10000, ErrorMessage = " আপনার লেখাতে অন্তত ২০টি শব্দ থাকতে হবে  ", MinimumLength = 100)]
         [Display(Name = "Post Content")]
         public string PostContent { get; set; }
 

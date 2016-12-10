@@ -30,6 +30,9 @@ namespace ProblemsBlog.Controllers
 
         public ActionResult UserHome()
         {
+
+            //latest post
+            ViewData["LatestPost"] = db.Post.OrderByDescending(p => p.Time).Take(3);
             return View(db.Post.OrderByDescending(x => x.Time).ToList());
         }
 
@@ -64,9 +67,13 @@ namespace ProblemsBlog.Controllers
             //int a = Convert.ToInt32(Session["UserId"]);
             //ViewData["CommentImage"] = db.Users.Where(b => b.Image == a.ToString(CultureInfo.InvariantCulture));
 
+            //ViewData["Comenterinfo"]= from usr in db.Users
+            //                  join cmnt in db.Comments on usr.UserId equals cmnt.UserId
+            //                  where cmnt.UserId == postid
+            //                  select new { Users = usr, Comments = cmnt };
 
 
-                 return View();
+            return View();
         }
 
        
@@ -165,6 +172,18 @@ namespace ProblemsBlog.Controllers
             return View(aComment);
         }
 
+        public ActionResult DeletePost(int id)
+        {
+            UserPost userpost = db.Post.Find(id);
+            db.Post.Remove(userpost);
+            db.SaveChanges();
+            return RedirectToAction("UserProfile", "Registration");
+        }
+
+
+
+
+
 
         public ActionResult Edit(int? id)
         {
@@ -217,7 +236,7 @@ namespace ProblemsBlog.Controllers
             UserPost userpost = db.Post.Find(id);
             db.Post.Remove(userpost);
             db.SaveChanges();
-            return RedirectToAction("Home");
+            return RedirectToAction("UserProfile","Registration");
         }
 
         protected override void Dispose(bool disposing)

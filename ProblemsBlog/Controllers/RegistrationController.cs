@@ -134,7 +134,8 @@ namespace ProblemsBlog.Controllers
                 // all status from user db
                 ViewData["AllStatus"] = aManager.GetAllPostbyUserID(Convert.ToInt32(Session["UserId"]));
 
-
+                //latest post
+                ViewData["LatestPost"]=db.Post.OrderByDescending(p => p.Time).Take(3);
 
                 return View();
             }
@@ -157,6 +158,8 @@ namespace ProblemsBlog.Controllers
                 ViewData["AllStatus"] = aManager.GetAllPostbyUserID(Convert.ToInt32(Session["UserId"]));
 
 
+                //latest post
+                ViewData["LatestPost"] = db.Post.OrderByDescending(p => p.Time).Take(2);
 
 
                 userPost.UserId = Convert.ToInt32(Session["UserId"]);
@@ -225,15 +228,16 @@ namespace ProblemsBlog.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(User user, HttpPostedFileBase file)
         {
-            
-            string filename = System.IO.Path.GetFileName(file.FileName);
+            if (file != null)
+            {
+                string filename = System.IO.Path.GetFileName(file.FileName);
 
-            /*Saving the file in server folder*/
-            file.SaveAs(Server.MapPath("~/Images/" + filename));
+                /*Saving the file in server folder*/
+                file.SaveAs(Server.MapPath("~/Images/" + filename));
 
-            user.Image = "Images/" + filename;
-            
-          
+                user.Image = "Images/" + filename;
+            }
+
             if (ModelState.IsValid)
             {
                 db.Entry(user).State = EntityState.Modified;

@@ -1,141 +1,88 @@
-﻿
-@model ProblemsBlog.Models.Comment
-
+﻿@model ProblemsBlog.Models.Comment
 @using ProblemsBlog.Models
 @{
     IEnumerable<Comment> allComments = ViewData["AllComments"] as IEnumerable<Comment>;
     Int32 a = allComments.Count();
 }
 
-@*@{ IEnumerable<User> aUser = ViewData["CommentImage"] as IEnumerable<User>;}*@
 @{
     ViewBag.Title = "Details";
 }
 
 <link href="~/Content/blog-post.css" rel="stylesheet" />
-@*<link href="~/Content/bootstrap.css" rel="stylesheet" />*@
-<div>
-    <div class="container">
-        <div class="row">
-            <!-- Blog Post Content Column -->
-            <div class="col-lg-8">
-                <!-- Blog Post -->
-                <!-- Title -->
-                <h1>
-                    @*@Html.DisplayFor(model => model.PostTitle)*@
-                    @ViewBag.UserPost.PostTitle
-                </h1>
-                <!-- Date/Time -->
-                <p><span class="glyphicon glyphicon-time"></span> প্রকাশিত হয়েছে- @ViewBag.UserPost.Time
-    @*@Html.DisplayFor(model => model.Time)*@</p>
 
-                <hr>
-                <!-- Author -->
-                <p class="lead"> <a href="/Registration/Details/@ViewBag.UserPost.UserId" style="text-decoration: none">লিখেছেন-@ViewBag.UserPost.Author</a>
-    @*@Html.DisplayFor(model => model.Author)*@</p> 
-                <hr>
-                <!-- Preview Image -->
-                @*@html.displayfor(model=> model.Image)*@
-                <img class="img-responsive" src="/@ViewBag.UserPost.Image">
-                <hr>
-                <!-- Post Content -->
-                <p class="lead">
-                    @ViewBag.UserPost.PostContent
-                </p>
-                <hr>
-                <!-- Blog Comments -->
-                <!-- Comments Form -->
-                <div class="well">
-                    
-              
-                    
-                    @using (Html.BeginForm())
-            {
-    @Html.AntiForgeryToken()
+<div class="container">
+    <div class="row">
+        <!-- Blog Post Content Column -->
+        <div class="col-lg-8">
 
-    <div class="form-horizontal">
-       
-        @Html.ValidationSummary(true)
+            <!-- Title -->
+            <h1>@ViewBag.UserPost.PostTitle</h1>
+            <!-- Date/Time -->
+            <p><span class="glyphicon glyphicon-time"></span> প্রকাশিত হয়েছে- @ViewBag.UserPost.Time</p><hr>
+            <!-- Author -->
+            <p class="lead"> <a href="/Registration/Details/@ViewBag.UserPost.UserId" style="text-decoration: none">লিখেছেন-@ViewBag.UserPost.Author</a></p> <hr>
+            <!-- Preview Image -->
+            <img class="img-responsive" src="/@ViewBag.UserPost.Image"><hr>
+            <!-- Post Content -->
+            <p class="lead">@ViewBag.UserPost.PostContent</p><hr>
 
-        <div class="form-group">
-            @*@Html.LabelFor(model => model.UserName, new { @class = "control-label col-md-6" })*@
-            
-            <div class="control-label col-md-4"><h4>Leave a Comment:</h4></div>
-            <div class="col-md-8">
-            @Html.EditorFor(model => model.UserComment)
-            @Html.ValidationMessageFor(model => model.UserComment)
-            
-           </div>
-        </div>
-        <div class="form-group">
+            <!-- ......................................................Comments Form -->
+            <div class="well">
 
-            <div class="col-md-offset-5 col-md-7">
-                <input type="submit" value="Publish" class="btn btn-Primary" />
+                @using (Html.BeginForm())
+                {
+
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+
+                        @Html.ValidationSummary(true)
+
+                        <div class="form-group">
+                            <div class="control-label col-md-4"><h4>Leave a Comment:</h4></div>
+                            <div class="col-md-8">
+                                @Html.TextAreaFor(model => model.UserComment, new { style = "width:400px;height:150px" })
+                                @Html.ValidationMessageFor(model => model.UserComment)
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-5 col-md-7">
+                                <input type="submit" value="Publish" class="btn btn-Primary" />
+                            </div>
+
+                        </div>
+                    </div>
+
+                }
             </div>
 
-        </div>
-        </div>
-    
-            }
+        </div> @*end of first col-lg-8*@
 
-
+        <div class="col-lg-4"></div>
     </div>
+</div>
 
-
-            </div> @*end of first col*@
-           
-
-            <div class="col-lg-4">
-             
-    @*IEnumerable<Comment> allComments = ViewData["AllComments"] as IEnumerable<Comment>;}*@  
-                             
-                <h3>মতামত দিয়েছেন:@a জন </h3> <hr> 
+<h3>মতামত দিয়েছেন:@a জন </h3>
 @if (allComments != null)
 {
-
     foreach (Comment v in allComments)
     {
-        
+
         <div class="container">
-            
-            <div class="row well-lg">
-                
+
+            <div class="row well">
+
                 @*Commenter Name*@
-                <div class="col-sm-4">
-                    <h3>@v.UserName</h3>
-                </div>
+                <div class="col-sm-5"><h3>@v.UserName</h3></div>
 
                 @*Comments*@
 
-                <div class="col-sm-4">
-                    @v.UserComment 
-
-                </div>
-                <div class="col-sm-4">
-                    @*@if (aUser != null)
-{
-    foreach (var user in aUser)
-    {
-        <img src="@user.Image" class="img-responsive img-rounded" width="150" height="100" />
-    }
-}*@
-                </div>
+                <div class="col-sm-7">@v.UserComment </div>
 
             </div>
-            <hr>
-        </div> @*end foreach container*@
 
-       
-    }
-
-    
-
-    } @*end of commnts list*@
-
-   
-
- 
-</div>
         </div>
-    </div>
-</div>
+    }
+}

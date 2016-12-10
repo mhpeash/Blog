@@ -216,7 +216,7 @@
 
                                 <div class="control-label col-md-4"><h4>Leave a Comment:</h4></div>
                                 <div class="col-md-8">
-                                    @Html.EditorFor(model => model.UserComment,new { style="width:450px;"})
+                                    @Html.TextAreaFor(model => model.UserComment,new { style="width:450px;height:180px"})
                                     @Html.ValidationMessageFor(model => model.UserComment)
 
                                 </div>
@@ -224,7 +224,7 @@
                             <div class="form-group">
 
                                 <div class="col-md-offset-5 col-md-7">
-                                    <input type="submit" value="Publish" class="btn btn-Primary" />
+                                    <input type="submit" value="Publish" class="btn btn-Warning" />
                                 </div>
 
                             </div>
