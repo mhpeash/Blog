@@ -24,6 +24,8 @@
     <link href="https://fonts.googleapis.com/css?family=Patua+One" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+    <script>tinymce.init({ selector: '#UserComment' });</script>
 
     <style>
         body {
@@ -72,7 +74,7 @@
         .well {
             background-color: white;
             font-family: 'Patua One',cursive;
-            letter-spacing: 1px;
+            /*letter-spacing: 1px;*/
         }
 
 
@@ -124,6 +126,11 @@
             width: 60%;
             height: 20%;
         }
+
+        .form-group .btn:hover {
+            color: #313131;
+            box-shadow: 5px 5px 5px #888887;
+        }
     </style>
 
 </head>
@@ -171,19 +178,21 @@
              <div class="col-sm-8" style="margin-top: 100px">
                 <!-- Blog Post -->
                 <!-- Title -->
-                <h1>
-                    @*@Html.DisplayFor(model => model.PostTitle)*@
-                    @ViewBag.UserPost.PostTitle
-                </h1>
+                 <div class="well" style="letter-spacing: 1px">
+                     <h1>
+                         @ViewBag.UserPost.PostTitle
+                     </h1>
+         
+                 </div>     
                 <!-- Date/Time -->
-                <p>
+                <div class="well">
                     <span class="glyphicon glyphicon-time"></span> প্রকাশিত হয়েছে- @ViewBag.UserPost.Time
                     @*@Html.DisplayFor(model => model.Time)*@
-                </p>
+                </div>
 
                 <hr>
                 <!-- Author -->
-                <p class="lead">
+                <p class="well">
                     <a href="/Registration/UserProfile" style="text-decoration: none">লিখেছেন-@ViewBag.UserPost.Author</a>
                     @*@Html.DisplayFor(model => model.Author)*@
                 </p>
@@ -193,9 +202,9 @@
                 <img class="img-responsive" src="/@ViewBag.UserPost.Image">
                 <hr>
                 <!-- Post Content -->
-                <p class="lead">
-                    @ViewBag.UserPost.PostContent
-                </p>
+                <div class="well">
+                    @Html.Raw(@ViewBag.UserPost.PostContent)
+                </div>
                 <hr>
                 <!-- Blog Comments -->
                 <!-- Comments Form -->
@@ -214,17 +223,17 @@
                             <div class="form-group">
                                 @*@Html.LabelFor(model => model.UserName, new { @class = "control-label col-md-6" })*@
 
-                                <div class="control-label col-md-4"><h4>Leave a Comment:</h4></div>
-                                <div class="col-md-8">
+                                <h3 style="margin-bottom:20px;padding-left: 15px">Leave a Comment:</h3>
+                                <div class="col-md-12">
                                     @Html.TextAreaFor(model => model.UserComment,new { style="width:450px;height:180px"})
                                     @Html.ValidationMessageFor(model => model.UserComment)
 
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" >
 
-                                <div class="col-md-offset-5 col-md-7">
-                                    <input type="submit" value="Publish" class="btn btn-Warning" />
+                                <div class="col-md-offset-10 col-md-2">
+                                    <input type="submit" value="Commnet" class="btn btn-warning "style="padding: 10px" />
                                 </div>
 
                             </div>
@@ -263,14 +272,7 @@
                             <div class="row well">
 
                                 <div class="col-sm-4">
-                                    @* commenter Image*@
-                                    @*@if (aUser != null)
-                            {
-                                foreach (var user in aUser)
-                                {
-                                    <img src="@user.Image" class="img-responsive img-rounded" width="150" height="100"/>
-                                }
-                            }*@
+                                  
 
                                 </div>
 
@@ -283,7 +285,7 @@
                                 @*Comments*@
 
                                 <div class="col-sm-4">
-                                    <h5>@v.UserComment</h5>
+                                    <h5> @Html.Raw(@v.UserComment)</h5>
 
                                 </div>
 

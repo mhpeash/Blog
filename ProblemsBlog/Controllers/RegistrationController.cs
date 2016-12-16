@@ -44,7 +44,25 @@ namespace ProblemsBlog.Controllers
             return View(user);
         }
 
-   
+
+
+        public ActionResult RegsteredUserInfo(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            User user = db.Users.Find(id);
+
+            ViewData["TotalPost"] = db.Post.Where(b => b.UserId == id);
+
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(user);
+        }
+
 
         // GET: /Registration/Create
         public ActionResult Create()

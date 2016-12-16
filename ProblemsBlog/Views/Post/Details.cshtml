@@ -1,4 +1,5 @@
 ﻿@model ProblemsBlog.Models.Comment
+@using System.Web.UI.WebControls
 @using ProblemsBlog.Models
 @{
     IEnumerable<Comment> allComments = ViewData["AllComments"] as IEnumerable<Comment>;
@@ -10,7 +11,8 @@
 }
 
 <link href="~/Content/blog-post.css" rel="stylesheet" />
-
+<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+<script>tinymce.init({ selector: '#UserComment' });</script>
 <div class="container">
     <div class="row">
         <!-- Blog Post Content Column -->
@@ -25,11 +27,13 @@
             <!-- Preview Image -->
             <img class="img-responsive" src="/@ViewBag.UserPost.Image"><hr>
             <!-- Post Content -->
-            <p class="lead">@ViewBag.UserPost.PostContent</p><hr>
+            <p class="lead">@Html.Raw(@ViewBag.UserPost.PostContent)</p><hr>
 
             <!-- ......................................................Comments Form -->
             <div class="well">
-
+                @*@if(Session["Author"]!=null)
+                {*@
+                    
                 @using (Html.BeginForm())
                 {
 
@@ -56,6 +60,7 @@
                     </div>
 
                 }
+                @*}*@
             </div>
 
         </div> @*end of first col-lg-8*@
@@ -79,10 +84,30 @@
 
                 @*Comments*@
 
-                <div class="col-sm-7">@v.UserComment </div>
+                <div class="col-sm-7">@Html.Raw(@v.UserComment) </div>
 
             </div>
 
         </div>
+    }
+}
+
+
+
+
+@{ IEnumerable<UserJoinComment> cmt = ViewData["CommentsData"] as IEnumerable<UserJoinComment>;
+}
+@if (cmt != null)
+{
+    foreach (UserJoinComment c in cmt)
+    {
+        <img src="/@c.Image">
+
+
+
+            @c.CommenterName;
+    
+    @c.Comment
+  
     }
 }

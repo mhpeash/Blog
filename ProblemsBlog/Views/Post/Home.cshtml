@@ -137,7 +137,7 @@
                         <img src="/@Html.DisplayFor(modelItem => item.Image)" class="img-responsive" width="650" height="230">
                     </div>
                     <h4>
-                        @item.PostContent.Substring(0, 100)......
+                       @Html.Raw( @item.PostContent.Substring(0, 100)) ......
 
                     </h4>
                     <button type="button" class="btn btn-warning right">@Html.ActionLink("See More", "Details", new { id = @Html.DisplayFor(modelItem => item.UserPostId) })</button>

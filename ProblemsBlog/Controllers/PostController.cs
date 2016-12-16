@@ -73,6 +73,24 @@ namespace ProblemsBlog.Controllers
             //                  select new { Users = usr, Comments = cmnt };
 
 
+            //try for join with two model
+            ViewData["CommentsData"] = (from usr in db.Users
+                join cmnt in db.Comments on usr.UserId equals cmnt.UserId
+                where cmnt.PostId == postid
+                select new
+                {
+                    usr.Name,
+                    usr.Image,
+                    cmnt.UserComment
+
+                });
+         
+
+        
+
+
+
+
             return View();
         }
 

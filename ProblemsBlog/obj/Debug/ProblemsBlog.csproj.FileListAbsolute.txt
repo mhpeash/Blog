@@ -108,7 +108,10 @@ C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\bin\Microso
 C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\obj\Debug\ProblemsBlog.Migrations.InitialCreate.resources
 C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\obj\Debug\ProblemsBlog.Migrations.commentclassadded.resources
 C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\obj\Debug\ProblemsBlog.Migrations.changepostcontentamount.resources
+C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\obj\Debug\ProblemsBlog.Migrations.addnewmceeditor.resources
+C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\obj\Debug\ProblemsBlog.Migrations.allowhtmltomodel.resources
+C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\obj\Debug\ProblemsBlog.Migrations.testforremovedatatypeinmodel.resources
+C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\obj\Debug\ProblemsBlog.Migrations.joinwithuserandcomment.resources
 C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\obj\Debug\ProblemsBlog.csproj.GenerateResource.Cache
 C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\obj\Debug\ProblemsBlog.dll
 C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\obj\Debug\ProblemsBlog.pdb
-C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\obj\Debug\ProblemsBlog.csprojResolveAssemblyReference.cache

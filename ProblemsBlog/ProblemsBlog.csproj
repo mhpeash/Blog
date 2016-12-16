@@ -178,10 +178,26 @@
     <Compile Include="Migrations\201611291425257_changepostcontentamount.Designer.cs">
       <DependentUpon>201611291425257_changepostcontentamount.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612110741374_addnewmceeditor.cs" />
+    <Compile Include="Migrations\201612110741374_addnewmceeditor.Designer.cs">
+      <DependentUpon>201612110741374_addnewmceeditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612110828041_allowhtmltomodel.cs" />
+    <Compile Include="Migrations\201612110828041_allowhtmltomodel.Designer.cs">
+      <DependentUpon>201612110828041_allowhtmltomodel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612110852533_testforremovedatatypeinmodel.cs" />
+    <Compile Include="Migrations\201612110852533_testforremovedatatypeinmodel.Designer.cs">
+      <DependentUpon>201612110852533_testforremovedatatypeinmodel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612161515205_joinwithuserandcomment.cs" />
+    <Compile Include="Migrations\201612161515205_joinwithuserandcomment.Designer.cs">
+      <DependentUpon>201612161515205_joinwithuserandcomment.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Comment.cs" />
-    <Compile Include="Models\MyViewModel.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserJoinComment.cs" />
     <Compile Include="Models\UserPost.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -237,6 +253,8 @@
     <Content Include="Views\Post\Home.cshtml" />
     <Content Include="Views\Post\UserHome.cshtml" />
     <Content Include="Views\Post\UserSinglePostDetails.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\tinymce_jquery_full.cshtml" />
+    <Content Include="Views\Registration\RegsteredUserInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -258,6 +276,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611291425257_changepostcontentamount.resx">
       <DependentUpon>201611291425257_changepostcontentamount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612110741374_addnewmceeditor.resx">
+      <DependentUpon>201612110741374_addnewmceeditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612110828041_allowhtmltomodel.resx">
+      <DependentUpon>201612110828041_allowhtmltomodel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612110852533_testforremovedatatypeinmodel.resx">
+      <DependentUpon>201612110852533_testforremovedatatypeinmodel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612161515205_joinwithuserandcomment.resx">
+      <DependentUpon>201612161515205_joinwithuserandcomment.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

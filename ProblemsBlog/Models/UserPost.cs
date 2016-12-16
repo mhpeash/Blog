@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace ProblemsBlog.Models
 {
@@ -11,9 +12,11 @@ namespace ProblemsBlog.Models
         public int UserPostId { get; set; }
         public int UserId { get; set; }
 
-        [DataType(DataType.MultilineText)]
+        
+        //[DataType(DataType.MultilineText)]
         [StringLength(10000, ErrorMessage = " আপনার লেখাতে অন্তত ২০টি শব্দ থাকতে হবে  ", MinimumLength = 100)]
         [Display(Name = "Post Content")]
+        [AllowHtml]
         public string PostContent { get; set; }
 
         [Display(Name = "Post Title")]
