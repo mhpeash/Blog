@@ -3,12 +3,22 @@
 
 @using ProblemsBlog.Context
 @using ProblemsBlog.Models
-@{
-    IEnumerable<Comment> allComments = ViewData["AllComments"] as IEnumerable<Comment>;
-    Int32 a = allComments.Count();
+@{ IEnumerable<UserJoinComment> cmt = ViewData["CommentsData"] as IEnumerable<UserJoinComment>;
+
+ if (cmt == null)
+ {
+     ViewBag.Message = "No Comments Yet";
+ }
+
+ else
+ {
+     Int32 a = cmt.Count();
+     ViewBag.Totalcomment = a;
+ }
+
+
 }
 
-@*@{ IEnumerable<User> aUser = ViewData["CommentImage"] as IEnumerable<User>;}*@
 
 @{
     Layout = null;
@@ -48,7 +58,7 @@
 
         .navbar-nav li a:hover, .navbar-nav li.active a {
             color: black !important;
-            //background-color: #E84C4C !important;
+            /*//background-color: #E84C4C !important;*/
             background-color: #fff !important;
         }
 
@@ -99,7 +109,7 @@
             background-color: rgb(255,204,51);
             color: white;
             min-width: 150px;
-            /*// box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);*/
+           
         }
 
             .dropdown-content a {
@@ -254,61 +264,43 @@
     
     @*---------------------------------------------------------------------------------*@
 
-    <div class="container" style="margin-top: 100px">
-        
-        <div class="row">
-            <div class="col-sm-6">
-                @*IEnumerable<Comment> allComments = ViewData["AllComments"] as IEnumerable<Comment>;}*@
 
-                <h3>মতামত দিয়েছেন:@a জন </h3>
-                @if (allComments != null)
-                {
-
-                    foreach (Comment v in allComments)
-                    {
-                     
-                        <div class="container">
-
-                            <div class="row well">
-
-                                <div class="col-sm-4">
-                                  
-
-                                </div>
+    <h3>@ViewBag.Message</h3>
 
 
-                                @*Commenter Name*@
-                                <div class="col-sm-4">
-                                    <h4>@v.UserName</h4>
-                                </div>
+    @if (cmt != null)
+    {
 
-                                @*Comments*@
+        foreach (UserJoinComment v in cmt)
+        {
 
-                                <div class="col-sm-4">
-                                    <h5> @Html.Raw(@v.UserComment)</h5>
+            <div class="container " style="margin-top: 100px">
+                <h3>মতামত দিয়েছেন:@ViewBag.Totalcomment জন </h3>
+                <div class="row well">
 
-                                </div>
-
-                            </div>
-                            <hr>
-                        </div> @*end foreach container*@
+                    @*Commenter Image*@
 
 
-                    }
+                    <div class="col-sm-4"><img src="/@v.Image" class="img-circle" width="150" height="150" /></div>
 
 
+                    @*Comments*@
 
-                } @*end of commnts list*@
+                    <div class="col-sm-4">
 
+                        <h3>
+                            @*Commenter Name*@
+                            @v.CommenterName
+                        </h3><hr>
 
-
+                        <p style="float: left"> @Html.Raw(@v.Comment)</p>
+                    </div>
+                    <div class="col-sm-4"></div>
+                </div>
 
             </div>
-            <div class="col-sm-6"></div>
-        </div>
-      
-
-    </div>
+        }
+    }
 
 
 

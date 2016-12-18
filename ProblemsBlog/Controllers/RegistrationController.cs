@@ -146,7 +146,7 @@ namespace ProblemsBlog.Controllers
             if (Session["UserId"] != null)
             {
                 //all user basic onfo
-                Models.User aUser = aManager.GetAllUserInfo(Convert.ToInt32(Session["UserId"]));
+                User aUser = aManager.GetAllUserInfo(Convert.ToInt32(Session["UserId"]));
                 ViewBag.User = aUser;
 
                 // all status from user db
@@ -169,7 +169,7 @@ namespace ProblemsBlog.Controllers
             {
 
                 //all user basic onfo
-                Models.User aUser = aManager.GetAllUserInfo(Convert.ToInt32(Session["UserId"]));
+               User aUser = aManager.GetAllUserInfo(Convert.ToInt32(Session["UserId"]));
                 ViewBag.User = aUser;
 
                 // all status from user db

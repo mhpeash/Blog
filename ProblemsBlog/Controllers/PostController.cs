@@ -61,20 +61,15 @@ namespace ProblemsBlog.Controllers
 
             //select all comments by postid
 
-            ViewData["AllComments"] = db.Comments.Where(p => p.PostId == postid);
-            //commenter picture
-
-            //int a = Convert.ToInt32(Session["UserId"]);
-            //ViewData["CommentImage"] = db.Users.Where(b => b.Image == a.ToString(CultureInfo.InvariantCulture));
-
-            //ViewData["Comenterinfo"]= from usr in db.Users
-            //                  join cmnt in db.Comments on usr.UserId equals cmnt.UserId
-            //                  where cmnt.UserId == postid
-            //                  select new { Users = usr, Comments = cmnt };
+            //ViewData["AllComments"] = db.Comments.Where(p => p.PostId == postid);
+            
+          
 
 
-            //try for join with two model
-            ViewData["CommentsData"] = (from usr in db.Users
+
+            //join value of comenter pic and comment
+
+            var joinimage= (from usr in db.Users
                 join cmnt in db.Comments on usr.UserId equals cmnt.UserId
                 where cmnt.PostId == postid
                 select new
@@ -83,11 +78,23 @@ namespace ProblemsBlog.Controllers
                     usr.Image,
                     cmnt.UserComment
 
-                });
-         
+                }).ToList();
+            List<UserJoinComment> aJoinCommentList = new List<UserJoinComment>();
 
-        
+           
+            {
+                foreach (var v in joinimage)
+                {
+                    UserJoinComment aJoinComment = new UserJoinComment();
 
+                    aJoinComment.Comment = v.UserComment;
+                    aJoinComment.CommenterName = v.Name;
+                    aJoinComment.Image = v.Image;
+                    aJoinCommentList.Add(aJoinComment);
+                    ViewData["CommentsData"] = aJoinCommentList;
+
+                }
+            }
 
 
 
@@ -149,13 +156,37 @@ namespace ProblemsBlog.Controllers
 
             int postid = Convert.ToInt32(Session["PostId"]);
 
-            //select all comments by postid
 
-            ViewData["AllComments"] = db.Comments.Where(p => p.PostId == postid);
-            //commenter picture
 
-            //int a = Convert.ToInt32(Session["UserId"]); 
-            //ViewData["CommentImage"] = db.Users.Where(b => b.Image == a.ToString());
+            // commenter name and image
+
+            var joinimage = (from usr in db.Users
+                             join cmnt in db.Comments on usr.UserId equals cmnt.UserId
+                             where cmnt.PostId == postid
+                             select new
+                             {
+                                 usr.Name,
+                                 usr.Image,
+                                 cmnt.UserComment
+
+                             }).ToList();
+            List<UserJoinComment> aJoinCommentList = new List<UserJoinComment>();
+
+
+            {
+                foreach (var v in joinimage)
+                {
+                    UserJoinComment aJoinComment = new UserJoinComment();
+
+                    aJoinComment.Comment = v.UserComment;
+                    aJoinComment.CommenterName = v.Name;
+                    aJoinComment.Image = v.Image;
+                    aJoinCommentList.Add(aJoinComment);
+                    ViewData["CommentsData"] = aJoinCommentList;
+
+                }
+            }
+
 
 
             return View();
@@ -171,14 +202,57 @@ namespace ProblemsBlog.Controllers
             {
                 return RedirectToAction("Login", "Registration");
             }
+
+
+            int postid = Convert.ToInt32(Session["PostId"]);
+
+
+
+            // commenter name and image
+
+            var joinimage = (from usr in db.Users
+                             join cmnt in db.Comments on usr.UserId equals cmnt.UserId
+                             where cmnt.PostId == postid
+                             select new
+                             {
+                                 usr.Name,
+                                 usr.Image,
+                                 cmnt.UserComment
+
+                             }).ToList();
+            List<UserJoinComment> aJoinCommentList = new List<UserJoinComment>();
+
+
+            {
+                foreach (var v in joinimage)
+                {
+                    UserJoinComment aJoinComment = new UserJoinComment();
+
+                    aJoinComment.Comment = v.UserComment;
+                    aJoinComment.CommenterName = v.Name;
+                    aJoinComment.Image = v.Image;
+                    aJoinCommentList.Add(aJoinComment);
+                    ViewData["CommentsData"] = aJoinCommentList;
+
+                }
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             aComment.UserId = Convert.ToInt32(Session["UserId"]);
             aComment.UserName = Session["Author"].ToString();
             aComment.PostId = Convert.ToInt32(Session["PostId"]);
-
-           //  int a  = Convert.ToInt32(Session["UserId"]); 
-
-           // //commenter picture
-           //ViewData["CommentImage"]= db.Users.Where(b => b.Image ==a.ToString());
 
             if (ModelState.IsValid)
             {

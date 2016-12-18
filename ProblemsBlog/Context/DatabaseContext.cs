@@ -14,6 +14,5 @@ namespace ProblemsBlog.Context
         public DbSet<UserPost> Post { get; set; }
 
         public DbSet<Comment> Comments { get; set; }
-        public DbSet<UserJoinComment> UserJoinComments { get; set; }
-    }
+            }
 }

@@ -1,11 +1,22 @@
 ﻿@model ProblemsBlog.Models.Comment
 @using System.Web.UI.WebControls
 @using ProblemsBlog.Models
-@{
-    IEnumerable<Comment> allComments = ViewData["AllComments"] as IEnumerable<Comment>;
-    Int32 a = allComments.Count();
-}
 
+@{ IEnumerable<UserJoinComment> cmt = ViewData["CommentsData"] as IEnumerable<UserJoinComment>;
+
+    if (cmt == null)
+    {
+        ViewBag.Message = "No Comments Yet";
+    }
+
+    else
+    {
+        Int32 a = cmt.Count();
+        ViewBag.Totalcomment = a;
+    }
+      
+      
+}
 @{
     ViewBag.Title = "Details";
 }
@@ -69,45 +80,41 @@
     </div>
 </div>
 
-<h3>মতামত দিয়েছেন:@a জন </h3>
-@if (allComments != null)
-{
-    foreach (Comment v in allComments)
+<h3>@ViewBag.Message</h3>
+
+
+@if (cmt != null)
+{<h3>মতামত দিয়েছেন:@ViewBag.Totalcomment জন </h3>
+       
+    foreach (UserJoinComment v in cmt)
     {
 
-        <div class="container">
+        <div class="container ">
 
             <div class="row well">
 
-                @*Commenter Name*@
-                <div class="col-sm-5"><h3>@v.UserName</h3></div>
+                @*Commenter Image*@
+
+
+                <div class="col-sm-4"><img src="/@v.Image" class="img-circle" width="150" height="150" /></div>
+
 
                 @*Comments*@
 
-                <div class="col-sm-7">@Html.Raw(@v.UserComment) </div>
+                <div class="col-sm-4">
 
+                    <h3>
+                        @*Commenter Name*@
+                    @v.CommenterName
+                </h3><hr>
+
+                <p style="float: left"> @Html.Raw(@v.Comment)</p>
             </div>
+            <div class="col-sm-4"></div>
+        </div>
 
         </div>
     }
 }
 
 
-
-
-@{ IEnumerable<UserJoinComment> cmt = ViewData["CommentsData"] as IEnumerable<UserJoinComment>;
-}
-@if (cmt != null)
-{
-    foreach (UserJoinComment c in cmt)
-    {
-        <img src="/@c.Image">
-
-
-
-            @c.CommenterName;
-    
-    @c.Comment
-  
-    }
-}
