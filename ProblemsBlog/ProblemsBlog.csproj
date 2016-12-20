@@ -198,6 +198,10 @@
     <Compile Include="Migrations\201612170833554_deletejoindbset.Designer.cs">
       <DependentUpon>201612170833554_deletejoindbset.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612181528278_addtimeincomment.cs" />
+    <Compile Include="Migrations\201612181528278_addtimeincomment.Designer.cs">
+      <DependentUpon>201612181528278_addtimeincomment.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\User.cs" />
@@ -295,6 +299,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612170833554_deletejoindbset.resx">
       <DependentUpon>201612170833554_deletejoindbset.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612181528278_addtimeincomment.resx">
+      <DependentUpon>201612181528278_addtimeincomment.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -5,33 +5,6 @@
     Layout = null;
 }
 
-@*<div class="container">
-
-    <div class="row" style="padding: 25px">
-
-        <div class="col-sm-5 img-responsive img-rounded">
-            <img src="/Images/logo.jpg" width="350" height="350">
-        </div>
-
-        <div class="col-sm-7">
-
-
-        </div>
-    </div>
-    <div style="text-decoration-blink:inherit"> *Image should be less than 2mB</div>
-</div>*@
-
-
-
-
-
-
-
-    
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,6 +14,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        
 
     <style>
         #bg1 {
@@ -75,9 +49,9 @@
             background-color: rgb(255,204,51);
         }
 
-            .navbar li a, .navbar .navbar-brand {
-                color: #fff !important;
-            }
+        .navbar li a, .navbar .navbar-brand {
+            color: #fff !important;
+        }
 
         .navbar-nav li a:hover, .navbar-nav li.active a {
             color: black !important;
@@ -99,11 +73,16 @@
         .control-label {
             color: white;
         
-
-        text-danger{
+}
+        text-danger
+        {
             color: rgb(24,188,156);
         }
     </style>
+    
+ 
+    
+
 </head>
 
 
@@ -184,13 +163,13 @@
                                 <div class="col-md-6">
                                     @Html.EditorFor(model => model.ConfirmPassword)
                                     <span style=" color: rgb(24,188,156)">  @Html.ValidationMessageFor(model => model.ConfirmPassword)</span>
-</div>
+                                </div>
                             </div>
 
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Image, new { @class = "control-label col-md-6" })
                                 <div class="col-md-6">
-                                    <input type="file" name="file" />&nbsp;&nbsp;&nbsp; @ViewBag.Message
+                                    <input type="file" name="file" id="myfile" />&nbsp;&nbsp;&nbsp;
                                 </div>
                             </div>
 
@@ -204,7 +183,7 @@
 
                             <div class="form-group">
                                 <div class="col-md-offset-8 col-md-4">
-                                    <input type="submit" value="Create Account" class="btn btn-warning" />
+                                    <input type="submit" value="Create Account" class="btn btn-warning"  id="isubmit"/>
                                 </div>
                             </div>
                         </div>
@@ -237,29 +216,45 @@
         </footer>
 
     </div>
+    
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>    
+    <script type="text/javascript">
+        $('#isubmit').click(function (e) {
+                
+                    if (window.File && window.FileReader && window.FileList && window.Blob) {
+                        //get the file size and file type from file input field
+                        var fsize = $('#myfile')[0].files[0].size;
 
 
+                        if (fsize > 1048576) //do something if file size more than 1 mb (1048576)
+                        {
 
+                            alert(fsize + " bites\nToo big!");
+                            e.preventDefault();
+
+                        } else {
+                            alert(fsize + " bites\nYou are good to go!");
+                        }
+                   
+           
+        }
+        });
+
+        
+    </script>
+    
+    
+   
+    
+    
+
+    
 </body>
 </html>
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@*@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}*@

@@ -26,7 +26,7 @@
         }
 
         #rowbg {
-            //background-color:rgba(24,188,156,0.8);
+            /*//background-color:rgba(24,188,156,0.8);*/
             background-color: rgba(0,0,0,0.5);
             height: 947px;
             width: 100%;
@@ -49,9 +49,9 @@
             background-color: rgb(255,204,51);
         }
 
-            .navbar li a, .navbar .navbar-brand {
-                color: #fff !important;
-            }
+        .navbar li a, .navbar .navbar-brand {
+            color: #fff !important;
+        }
 
         .navbar-nav li a:hover, .navbar-nav li.active a {
             color: black !important;
@@ -82,6 +82,15 @@
         }
 
     </style>
+
+    <script type="text/javascript">
+        function preventBack() { window.history.forward(); }
+        setTimeout("preventBack()", 0);
+        window.onunload = function () { null };
+    </script>
+
+
+
 </head>
 
 
@@ -183,8 +192,7 @@
 
     </div>
 
-
-
+    
 </body>
 </html>
 

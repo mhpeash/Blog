@@ -29,6 +29,8 @@ namespace ProblemsBlog.Controllers
         //Single user information details
         public ActionResult Details(int? id)
         {
+            
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -134,6 +136,7 @@ namespace ProblemsBlog.Controllers
                 Session["UserId"] = loggedInUser.UserId.ToString();
                 Session["Username"] = loggedInUser.UserName;
                 Session["Author"] = loggedInUser.Name;
+                Session["Pass"] = loggedInUser.Password;
                 return RedirectToAction("UserProfile");
             }
             return View();
@@ -214,13 +217,14 @@ namespace ProblemsBlog.Controllers
 
         public ActionResult LogOut()
         {
-            FormsAuthentication.SignOut();
-            
+            Session.Clear();
+            Session.RemoveAll();
             Session.Abandon();
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.Cache.SetExpires(DateTime.Now.AddSeconds(-1));
+            Response.Cache.SetNoStore();
 
-            HttpCookie aCookie = new HttpCookie(FormsAuthentication.FormsCookieName, "");
-            aCookie.Expires = DateTime.Now.AddMonths(-5);
-            Response.Cookies.Add(aCookie);
+            FormsAuthentication.SignOut();
 
             return RedirectToAction("Login");
         }
@@ -228,16 +232,29 @@ namespace ProblemsBlog.Controllers
         // GET: /Registration/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+
+            int testid =Convert.ToInt32(Session["UserId"]) ;
+
+            if (id !=testid)
             {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.Users.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
+            
+           
+            
+           User user = db.Users.Find(id);
+
+           if (user == null)
+           {
+               return HttpNotFound();
+           }
+           return View(user);
+
+         
         }
 
         // POST: /Registration/Edit/5
@@ -246,6 +263,10 @@ namespace ProblemsBlog.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(User user, HttpPostedFileBase file)
         {
+            
+            
+            
+            
             if (file != null)
             {
                 string filename = System.IO.Path.GetFileName(file.FileName);
@@ -264,6 +285,9 @@ namespace ProblemsBlog.Controllers
             }
             return View(user);
         }
+
+
+
 
         // GET: /Registration/Delete/5
         public ActionResult Delete(int? id)

@@ -76,7 +76,8 @@ namespace ProblemsBlog.Controllers
                 {
                     usr.Name,
                     usr.Image,
-                    cmnt.UserComment
+                    cmnt.UserComment,
+                    cmnt.Time
 
                 }).ToList();
             List<UserJoinComment> aJoinCommentList = new List<UserJoinComment>();
@@ -90,6 +91,7 @@ namespace ProblemsBlog.Controllers
                     aJoinComment.Comment = v.UserComment;
                     aJoinComment.CommenterName = v.Name;
                     aJoinComment.Image = v.Image;
+                    aJoinComment.Time = v.Time;
                     aJoinCommentList.Add(aJoinComment);
                     ViewData["CommentsData"] = aJoinCommentList;
 
@@ -115,6 +117,7 @@ namespace ProblemsBlog.Controllers
             aComment.UserId = Convert.ToInt32(Session["UserId"]);
             aComment.UserName = Session["Author"].ToString();
             aComment.PostId = Convert.ToInt32(Session["PostId"]);
+            aComment.Time = DateTime.Now;
 
             //int a = Convert.ToInt32(Session["UserId"]);
 
@@ -167,7 +170,8 @@ namespace ProblemsBlog.Controllers
                              {
                                  usr.Name,
                                  usr.Image,
-                                 cmnt.UserComment
+                                 cmnt.UserComment,
+                                 cmnt.Time
 
                              }).ToList();
             List<UserJoinComment> aJoinCommentList = new List<UserJoinComment>();
@@ -181,6 +185,7 @@ namespace ProblemsBlog.Controllers
                     aJoinComment.Comment = v.UserComment;
                     aJoinComment.CommenterName = v.Name;
                     aJoinComment.Image = v.Image;
+                    aJoinComment.Time = v.Time;
                     aJoinCommentList.Add(aJoinComment);
                     ViewData["CommentsData"] = aJoinCommentList;
 
@@ -206,8 +211,6 @@ namespace ProblemsBlog.Controllers
 
             int postid = Convert.ToInt32(Session["PostId"]);
 
-
-
             // commenter name and image
 
             var joinimage = (from usr in db.Users
@@ -217,7 +220,8 @@ namespace ProblemsBlog.Controllers
                              {
                                  usr.Name,
                                  usr.Image,
-                                 cmnt.UserComment
+                                 cmnt.UserComment,
+                                 cmnt.Time
 
                              }).ToList();
             List<UserJoinComment> aJoinCommentList = new List<UserJoinComment>();
@@ -231,6 +235,7 @@ namespace ProblemsBlog.Controllers
                     aJoinComment.Comment = v.UserComment;
                     aJoinComment.CommenterName = v.Name;
                     aJoinComment.Image = v.Image;
+                    aJoinComment.Time = v.Time;
                     aJoinCommentList.Add(aJoinComment);
                     ViewData["CommentsData"] = aJoinCommentList;
 
@@ -239,20 +244,10 @@ namespace ProblemsBlog.Controllers
 
 
 
-
-
-
-
-
-
-
-
-
-
-
             aComment.UserId = Convert.ToInt32(Session["UserId"]);
             aComment.UserName = Session["Author"].ToString();
             aComment.PostId = Convert.ToInt32(Session["PostId"]);
+            aComment.Time = DateTime.Now;
 
             if (ModelState.IsValid)
             {

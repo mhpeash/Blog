@@ -105,8 +105,10 @@
 
                     <h3>
                         @*Commenter Name*@
-                    @v.CommenterName
-                </h3><hr>
+                        @v.CommenterName
+                    </h3>
+                    <span class="glyphicon glyphicon-time"></span>:@v.Time
+                    <hr>
 
                 <p style="float: left"> @Html.Raw(@v.Comment)</p>
             </div>

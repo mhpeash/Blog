@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
 namespace ProblemsBlog.Models
@@ -16,5 +17,10 @@ namespace ProblemsBlog.Models
         [AllowHtml]
         [Display(Name = "Your Comment")]
         public string UserComment { get; set; }
+
+        public DateTime Time { get; set; }
+
+ 
+
     }
 }
