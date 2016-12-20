@@ -9,61 +9,124 @@
     @Scripts.Render("~/bundles/modernizr")
 
     <style>
+        body {
+            background-color: #F2F2F2;
+        }
+
+
         .navbar {
-            margin-bottom: 0px;
-            background-color: rgb(255,204,51);
-            z-index: 9999;
             border: 0;
             font-size: 15px !important;
             line-height: 1.42857143 !important;
             letter-spacing: 3px;
             border-radius: 0;
             font-family: Montserrat, sans-serif;
+            background-color: #ffd24d;
         }
 
             .navbar li a, .navbar .navbar-brand {
-                color: black !important;
+                color: #fff !important;
             }
 
         .navbar-nav li a:hover, .navbar-nav li.active a {
             color: black !important;
-            background-color: #fff !important;
+            background-color: white !important;
+        }
+
+        .navbar-inverse .navbar-toggle {
+            border-color: transparent;
+            color: #fff !important;
+        }
+
+
+        .jumbocontent {
+            font-family: monospace Lucida;
+            text-align: center;
+            padding: 50px;
+            margin-top: 10px;
+            font-weight: bolder;
+        }
+
+        .jumbotron {
+            background-color: #ffd24d;
+            color: white;
+        }
+
+        .row .glyphicon {
+            font-size: 15px;
+            padding-left: 8px;
+            padding-right: 8px;
+            color: gray;
+        }
+
+
+        footer a:hover {
+            color: #ffd24d;
+            text-decoration: none;
+        }
+
+
+        #titlefont {
+            font-family: 'Rubik Mono One',sans-serif;
+            padding-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .well {
+            background-color: #FFFFFF;
+            border: 1px solid #FFFFFF;
+        }
+
+        .btn a {
+            color: white;
+            text-decoration: none;
         }
     </style>
 
-
 </head>
+
+
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("HekkUR-ডাইরি  ", "Home", "Post", null, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
+                <a class="navbar-brand" href="#">POPS-Blog</a>
+            </div><!--end navheader-->
+            <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
-                    <li>@Html.ActionLink("SignIn", "Create", "Registration")</li>
-                    <li>@Html.ActionLink("LogIn", "Login", "Registration")</li>
-                  
+                    <li><a href="/Registration/Create"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    <li><a href="/Registration/Login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                 </ul>
+            </div><!--glyphicon divright-->
+        </div> <!--end header container-fluid-->
+    </nav>
 
-            </div>
-        </div>
-    </div>
+
+
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer class="text-center">
-            <div class="container" style="background-color: rgb(255,204,51);border: 1px solid whitesmoke;padding:5px">
-                <p>&copy; @DateTime.Now.Year -Created By <a href="https:/mhpeash.github.io/Home.html">mhpeash</a></p>
-            </div>
-
-        </footer>
     </div>
+
+        <div class="container-fluid" style="padding:20px;background-color:#313131;color:#E84C4C;margin-top:100px">
+            <footer>
+                <div class="row">
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-4">
+                        <h4>All Right Reserved By 2016 <a href="https://mhpeash.github.io/Home.html">| mhpeash |</a> </h4>
+                    </div>
+
+                    <div class="col-sm-4"></div>
+                </div>
+
+            </footer>
+        </div>
+
+   
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

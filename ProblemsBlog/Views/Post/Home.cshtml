@@ -1,9 +1,11 @@
-﻿@model IEnumerable<ProblemsBlog.Models.UserPost>
-     
-@{
-    Layout = null;
-}
-                   
+﻿
+@using System.Web.UI.WebControls
+@using ProblemsBlog.Models
+@model IEnumerable<ProblemsBlog.Models.UserPost>   
+@{Layout = null;}  
+
+@{ IEnumerable<UserPost> value = ViewData["LatestPost"] as IEnumerable<UserPost>;}
+            
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -94,77 +96,111 @@
 
 
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">POPS-Blog</a>
-            </div><!--end navheader-->
-            <div class="collapse navbar-collapse" id="myNavbar">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/Registration/Create"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                    <li><a href="/Registration/Login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                </ul>
-            </div><!--glyphicon divright-->
-        </div> <!--end header container-fluid-->
-    </nav>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">POPS-Blog</a>
+        </div><!--end navheader-->
+ 
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/Registration/Create"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a href="/Registration/Login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+
+            </ul>
+        </div><!--glyphicon divright-->
+    </div> <!--end header container-fluid-->
+</nav>
+
     <div class="container-fluid jumbocontent" style="padding:0px">
         <div class="jumbotron"><h1>ডাইরি</h1></div>
     </div>
 
-    <div class="container" style="margin-top:30px;margin-bottom: 30px">
+    <div class="container" style="margin-top:30px;margin-bottom:30px">
      
-        <div class="row well">
-            <div class="col-sm-8" style="border-right: 1px groove gray">
-                @foreach (var item in Model)
+       <div class="row well">
+
+        
+        <div class="col-sm-8" style="border-right: 1px groove gray">
+                 @foreach (var item in Model)
                 {
 
-                    <div id="titlefont">
-                        <h1>
-                            <a href="/Post/Details/@Html.DisplayFor(modelItem => item.UserPostId)" style="text-decoration: none; color: #313131">@Html.DisplayFor(modelItem => item.PostTitle)</a>
-                        </h1>
-                    </div>
-                    <p style="color: gray; font-size: 18px; margin-top: 20px">
-                        <span class="glyphicon glyphicon-user"></span>@Html.DisplayFor(modelItem => item.Author)
-                        <span class="glyphicon glyphicon-time"></span>@Html.DisplayFor(modelItem => item.Time)
-                        <span class="glyphicon glyphicon-comment"></span>Comment
-                    </p>
-                    <div style="margin-bottom: 30px">
-                        <img src="/@Html.DisplayFor(modelItem => item.Image)" class="img-responsive" width="650" height="230">
-                    </div>
-                    <h4>
-                       @Html.Raw( @item.PostContent.Substring(0, 100)) ......
-
-                    </h4>
-                    <button type="button" class="btn btn-warning right">@Html.ActionLink("See More", "Details", new { id = @Html.DisplayFor(modelItem => item.UserPostId) })</button>
+                <div id="titlefont">
+                    <h1>
+                        <a href="/Post/Details/@Html.DisplayFor(modelItem => item.UserPostId)" style="text-decoration: none; color: #313131">@Html.DisplayFor(modelItem => item.PostTitle)</a>
+                    </h1>
+                </div>
+                <p style="color: gray; font-size: 18px; margin-top: 20px">
+                    <span class="glyphicon glyphicon-user"></span>@Html.DisplayFor(modelItem => item.Author)
+                    <span class="glyphicon glyphicon-time"></span>@Html.DisplayFor(modelItem => item.Time)
+                   
+                </p>
+                <div style="margin-bottom: 30px">
+                    <img src="/@Html.DisplayFor(modelItem => item.Image)" class="img-responsive" width="650" height="230">
+                </div>
+                <h4>@Html.Raw(@item.PostContent.Substring(0, 100)) ......</h4>
+                <button type="button" class="btn btn-warning right">@Html.ActionLink("See More", "Details", new {id = @Html.DisplayFor(modelItem => item.UserPostId)})</button>
                     <hr>
+                 }
 
+        </div><!--end colsm-8-->
+        
+        <div class="col-sm-4">
+<div>
+    <h3>Latest Post</h3>
+           
+    @if (value != null)
+{
+    foreach (var latestpost in value)
+    { 
+        <div class="well-sm">
+            <p><img src="/@latestpost.Image" class="img-circle" width="100" height="100" style="border-radius: 60%" />@latestpost.PostTitle</p>
+        </div><hr>
+    }
+    }
+</div>
+
+
+            <span class="glyphicon glyphicon-search"></span>Search
+            <div style="background-color: #FFD24D;padding: 50px">
+                <hr>
+                @using (@Html.BeginForm("Searching", "Post", FormMethod.Get))
+                {
+                  
+                    @Html.RadioButton("searchBy", "Author", true) <text>Author</text>
+                    @Html.RadioButton("searchBy", "Title") <text>Title</text><br />
+                    @Html.TextBox("searchitem")
+                    <input type="submit" value="search" class="btn btn-warning" style="margin-top: 10px" />
                 }
-            </div> 
-             
-            <div class="col-sm-4">
-                <h3>Latest Post </h3><hr>
             </div>
+
 
         </div>
-     </div> <!--end content container-->
 
-    <div class="container-fluid" style="padding:20px;background-color:#313131;color:#E84C4C;margin-top:100px">
-        <footer>
-            <div class="row">
-                <div class="col-sm-4"></div>
-                <div class="col-sm-4">
-                    <h4>All Right Reserved By 2016 <a href="https://mhpeash.github.io/Home.html">| mhpeash |</a> </h4>
+      </div> <!---end row--->>
+ </div> <!--end  container-->
+
+
+
+        <div class="container-fluid" style="padding:20px;background-color:#313131;color:#E84C4C;margin-top:100px">
+            <footer>
+                <div class="row">
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-4">
+                        <h4>All Right Reserved By 2016 <a href="https://mhpeash.github.io/Home.html">| mhpeash |</a> </h4>
+                    </div>
+
+                    <div class="col-sm-4"></div>
                 </div>
-                <div class="col-sm-4"></div>
-            </div>
 
-        </footer>
-    </div>
+            </footer>
+        </div>
 
 </body>
+
 </html>

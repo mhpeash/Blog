@@ -230,7 +230,7 @@
                             @Html.LabelFor(model => model.Image, new { @class = "control-label col-md-4" })
 
                             <div class="col-md-8" id="posttextbar">
-                                <input type="file" name="file" />&nbsp;&nbsp;&nbsp;
+                                <input type="file" name="file" id="myfile"/>&nbsp;&nbsp;&nbsp;
                             </div>
 
                         </div>
@@ -238,7 +238,7 @@
                         <div class="form-group">
 
                             <div class="col-md-offset-4 col-md-8">
-                                <input type="submit" value="Publish" class="btn btn-default" />
+                                <input type="submit" value="Publish" class="btn btn-default" id="isubmit" />
                             </div>
 
                         </div>
@@ -343,6 +343,40 @@
         </footer>
 
     </div>
+
+    @*checking image size*@
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
+    <script type="text/javascript">
+        $('#isubmit').click(function (e) {
+
+            if (window.File && window.FileReader && window.FileList && window.Blob) {
+                //get the file size and file type from file input field
+                var fsize = $('#myfile')[0].files[0].size;
+
+
+                if (fsize > 2097152) //do something if file size more than 1 mb (1048576)
+                {
+
+                    alert(fsize + " bites\n Image size must be less than 2Mb");
+                    e.preventDefault();
+
+                } else {
+                    alert(fsize + " bites\nYou are good to go!");
+                }
+
+
+            }
+        });
+
+
+    </script>
+
+
+
+
+
 
 
     

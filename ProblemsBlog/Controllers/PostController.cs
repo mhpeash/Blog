@@ -23,14 +23,19 @@ namespace ProblemsBlog.Controllers
 
         public ActionResult Home()
         {
-             return View(db.Post.OrderByDescending(x => x.Time).ToList());
+            //latest post
+            ViewData["LatestPost"] = db.Post.OrderByDescending(p => p.Time).Take(3); 
+            return View(db.Post.OrderByDescending(x => x.Time).ToList());
 
          
         }
 
         public ActionResult UserHome()
         {
-
+            if (Session["UserId"] == null)
+            {
+                return RedirectToAction("Home");
+            }
             //latest post
             ViewData["LatestPost"] = db.Post.OrderByDescending(p => p.Time).Take(3);
             return View(db.Post.OrderByDescending(x => x.Time).ToList());
@@ -258,6 +263,29 @@ namespace ProblemsBlog.Controllers
 
             return View(aComment);
         }
+
+
+       
+
+        public ActionResult Searching(string searchBy, string searchitem)
+        {
+
+            if (searchBy == "Author")
+            {
+
+                return View(db.Post.Where(e => e.Author.StartsWith(searchitem) || searchitem == null).ToList());
+            }
+            else
+            {
+                return View(db.Post.Where(e => e.PostTitle.StartsWith(searchitem) || searchitem == null).ToList());
+
+
+            }
+        }
+
+
+
+
 
         public ActionResult DeletePost(int id)
         {

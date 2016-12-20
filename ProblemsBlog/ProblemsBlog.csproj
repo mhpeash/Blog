@@ -263,6 +263,7 @@
     <Content Include="Views\Post\UserSinglePostDetails.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\tinymce_jquery_full.cshtml" />
     <Content Include="Views\Registration\RegsteredUserInfo.cshtml" />
+    <Content Include="Views\Post\Searching.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

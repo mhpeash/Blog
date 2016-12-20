@@ -146,7 +146,7 @@
 </head>
 
 <body>
-
+    
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -202,10 +202,11 @@
 
                 <hr>
                 <!-- Author -->
-                <p class="well">
-                    <a href="/Registration/UserProfile" style="text-decoration: none">লিখেছেন-@ViewBag.UserPost.Author</a>
-                    @*@Html.DisplayFor(model => model.Author)*@
-                </p>
+                 <p class="well">
+                     
+                     <a href="/Registration/RegsteredUserInfo/@ViewBag.UserPost.UserId" style="text-decoration: none">লিখেছেন-@ViewBag.UserPost.Author</a>
+                     @*@Html.DisplayFor(model => model.Author)*@
+                 </p>
                 <hr>
                 <!-- Preview Image -->
                 @*@html.displayfor(model=> model.Image)*@
