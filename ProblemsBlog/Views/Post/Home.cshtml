@@ -166,8 +166,9 @@
 </div>
 
 
-            <span class="glyphicon glyphicon-search"></span>Search
-            <div style="background-color: #FFD24D;padding: 50px">
+           
+            <div style="background-color: #FFD24D;padding:50px">
+                <span class="glyphicon glyphicon-search text-center" style="font-size: 30px; color: black"><kbd style="font-size: 40px ">Search</kbd></span>
                 <hr>
                 @using (@Html.BeginForm("Searching", "Post", FormMethod.Get))
                 {
@@ -175,14 +176,14 @@
                     @Html.RadioButton("searchBy", "Author", true) <text>Author</text>
                     @Html.RadioButton("searchBy", "Title") <text>Title</text><br />
                     @Html.TextBox("searchitem")
-                    <input type="submit" value="search" class="btn btn-warning" style="margin-top: 10px" />
+                    <input type="submit" value="search" class="btn btn-warning" style="margin-top: 10px"/>
                 }
             </div>
 
 
         </div>
 
-      </div> <!---end row--->>
+      </div> <!---end row--->
  </div> <!--end  container-->
 
 

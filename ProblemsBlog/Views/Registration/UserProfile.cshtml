@@ -148,6 +148,19 @@
 
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+
+                        @using (@Html.BeginForm("Searching", "Post", FormMethod.Get))
+                        {
+
+                            @Html.RadioButton("searchBy", "Author", true) <text>Author</text>
+                            @Html.RadioButton("searchBy", "Title") <text>Title</text>
+                            @Html.TextBox("searchitem")
+                            <input type="submit" value="Search" class="btn btn-warning" />
+                        }
+                    </li>
+
                     <li class="dropdown">
                         <a href="#" class="dropbtn">
                             <span class="glyphicon glyphicon-wrench"></span>Change-Password
@@ -158,8 +171,11 @@
                             <a href="#">Change ProfilePicture</a>
                         </div>
                     </li>
+                   
+                    
+
                     <li><a href="#"><span class="glyphicon glyphicon-send"></span>Contact-Admin</a></li>
-                    @*<li><a href="#"> <span class="glyphicon glyphicon-cog"></span>Change-Password</a></li>*@
+     
                     <li><a href="/Registration/Logout"><span class="glyphicon glyphicon-log-out"></span>Logout|@Session["UserName"]</a></li>
 
                 </ul>
@@ -220,7 +236,7 @@
                             <div class="col-md-8" id=" posttextbar">
                                 @*@Html.EditorFor(model => model.PostContent)*@
                                 @Html.EditorFor(model => model.PostContent)
-                                @Html.ValidationMessageFor(model => model.PostContent)
+                                <span style="color: rgb(24,188,156)">@Html.ValidationMessageFor(model => model.PostContent)</span>
                             </div>
                         </div>
 
@@ -288,9 +304,11 @@
             foreach (UserPost v in status)
             {
                 <div class="row well">
-                    <div class="col-sm-9">
+                    <div class="col-sm-12">
                         <a href="/Post/UserSinglePostDetails/@v.UserPostId" style="text-decoration: none"> <h3>@v.PostTitle</h3></a> <br>
-                        <p><span class="glyphicon glyphicon-time"></span> প্রকাশিত হয়েছে: @v.Time </p>
+                        <p><span class="glyphicon glyphicon-time"></span> প্রকাশিত হয়েছে: @v.Time 
+                            <a href="/Post/DeletePost/@v.UserPostId" style="border: 1px solid black;float: right;padding:10px;text-decoration: none"> Delete Post</a>
+                        </p>
                         <hr>
                         <img class="img-responsive" src="/@v.Image" /> <br>
                         <h4>Writer:@v.Author <br></h4>
@@ -299,15 +317,26 @@
                     </div>
                    
 
-                    <div class="col-sm-3">
-                        <a href="/Post/DeletePost/@v.UserPostId" style="border: 1px solid black;float: right;padding:10px; margin-top: 10px;text-decoration: none"> Delete Post</a>
-                    </div>
+                    @*<div class="col-sm-3"></div>*@
                 </div>
 
         @*@Html.Raw(Model.property)*@
 
             }
         }
+
+        @*searching*@
+        <div style="padding: 50px; background-color: #ffd24d; ">
+            <h2><kbd>Search</kbd></h2> <hr>
+            @using (@Html.BeginForm("Searching", "Post", FormMethod.Get))
+            {
+
+                @Html.RadioButton("searchBy", "Author", true) <text>Author</text>
+                @Html.RadioButton("searchBy", "Title") <text>Title</text>
+                @Html.TextBox("searchitem")
+                <input type="submit" value="search" class="btn btn-warning"/>
+            }
+        </div>
     </div>
     
     
@@ -362,9 +391,10 @@
                     alert(fsize + " bites\n Image size must be less than 2Mb");
                     e.preventDefault();
 
-                } else {
-                    alert(fsize + " bites\nYou are good to go!");
                 }
+                //else {
+                //    //alert(fsize + " bites\nYou are good to go!");
+                //}
 
 
             }

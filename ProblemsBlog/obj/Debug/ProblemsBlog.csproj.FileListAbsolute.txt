@@ -118,3 +118,7 @@ C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\obj\Debug\P
 C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\obj\Debug\ProblemsBlog.csprojResolveAssemblyReference.cache
 C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\obj\Debug\ProblemsBlog.Migrations.deletejoindbset.resources
 C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\obj\Debug\ProblemsBlog.Migrations.addtimeincomment.resources
+C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\bin\PagedList.dll
+C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\bin\PagedList.Mvc.dll
+C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\bin\PagedList.xml
+C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\bin\PagedList.Mvc.xml

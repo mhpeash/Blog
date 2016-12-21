@@ -178,11 +178,11 @@
 
             <div class="row well">
                 
-@foreach (var item in Model)
-                    {
 
                 <div class="col-sm-8" style="border-right: 1px groove gray">
-                    
+                
+                    @foreach (var item in Model)
+{
                     <div id="titlefont">
                         <h1>
                             <a href="/Post/UserSinglePostDetails/@Html.DisplayFor(modelItem => item.UserPostId)" style="text-decoration: none; color: #313131">@Html.DisplayFor(modelItem => item.PostTitle)</a>
@@ -203,10 +203,11 @@
                     <button type="button" class="btn btn-warning right">@Html.ActionLink("See More", "UserSinglePostDetails", new { id = @Html.DisplayFor(modelItem => item.UserPostId) })</button>
                     <hr>
 
-                    
-                </div>
                     }
+                </div>
+                    
                 <div class="col-sm-4">
+                    <div>
                     <h3>Latest Post</h3><hr>
 
                     @{ IEnumerable<UserPost> value = ViewData["LatestPost"] as IEnumerable<UserPost>;}
@@ -221,6 +222,20 @@
                            </div>
                         }
                     }
+                    </div> 
+                    
+                    @*searching*@
+                    <div style="padding: 50px; background-color: #ffd24d; ">
+                        <h2><kbd>Search</kbd></h2> <hr>
+                        @using (@Html.BeginForm("Searching", "Post", FormMethod.Get))
+                        {
+
+                            @Html.RadioButton("searchBy", "Author", true) <text>Author</text>
+                            @Html.RadioButton("searchBy", "Title") <text>Title</text><br />
+                            @Html.TextBox("searchitem")
+                            <input type="submit" value="search" class="btn btn-warning" style="margin-top: 10px" />
+                        }
+                    </div>
                 </div>
 
             </div>

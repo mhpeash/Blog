@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 using ProblemsBlog.Core.BLL;
 using ProblemsBlog.Models;
 using ProblemsBlog.Context;
@@ -267,17 +268,17 @@ namespace ProblemsBlog.Controllers
 
        
 
-        public ActionResult Searching(string searchBy, string searchitem)
+        public ActionResult Searching(string searchBy, string searchitem,int? page)
         {
 
             if (searchBy == "Author")
             {
 
-                return View(db.Post.Where(e => e.Author.StartsWith(searchitem) || searchitem == null).ToList());
+                return View(db.Post.Where(e => e.Author.StartsWith(searchitem) || searchitem == null).ToList().ToPagedList(page??1,5));
             }
             else
             {
-                return View(db.Post.Where(e => e.PostTitle.StartsWith(searchitem) || searchitem == null).ToList());
+                return View(db.Post.Where(e => e.PostTitle.StartsWith(searchitem) || searchitem == null).ToList().ToPagedList(page??1,5));
 
 
             }
