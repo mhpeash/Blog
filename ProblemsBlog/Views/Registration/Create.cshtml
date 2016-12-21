@@ -154,7 +154,7 @@
                                 @Html.LabelFor(model => model.Password, new { @class = "control-label col-md-6" })
                                 <div class="col-md-6">
                                     @Html.EditorFor(model => model.Password)
-                                <span style=" color: rgb(24,188,156)">    @Html.ValidationMessageFor(model => model.Password)</span>
+                                    <span style=" color: rgb(24,188,156)">    @Html.ValidationMessageFor(model => model.Password)</span>
                                 </div>
                             </div>
 
@@ -177,7 +177,7 @@
                                 @Html.LabelFor(model => model.Location, new { @class = "control-label col-md-6" })
                                 <div class="col-md-6">
                                     @Html.EditorFor(model => model.Location)
-                                  <<span style=" color: rgb(24,188,156)"> @Html.ValidationMessageFor(model => model.Location)</span>
+                                    <<span style=" color: rgb(24,188,156)"> @Html.ValidationMessageFor(model => model.Location)</span>
                                 </div>
                             </div>
 
@@ -186,8 +186,10 @@
                                     <input type="submit" value="Create Account" class="btn btn-warning"  id="isubmit"/>
                                 </div>
                             </div>
+                            <span style=" color: rgb(24,188,156)">  @ViewBag.Message </span>
+
                         </div>
-                    }
+                                          }
 
                         
                         

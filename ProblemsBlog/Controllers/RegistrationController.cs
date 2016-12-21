@@ -79,6 +79,19 @@ namespace ProblemsBlog.Controllers
         public ActionResult Create([Bind(Include = "UserId,Name,Email,UserName,Password,ConfirmPassword,Image,Location")] User user, HttpPostedFileBase file)
         {
 
+
+
+            //check unique username and email
+
+            if (db.Users.Any(a => a.UserName == user.UserName || a.Email == user.Email))
+
+            {
+                ViewBag.Message = "Username or Email Already Registered";
+                return View();
+            }
+
+
+
             if (file == null)
             {
                 user.Image = "Images/" + "icon.png";
