@@ -167,6 +167,7 @@
     <Compile Include="Context\DatabaseContext.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
+    <Compile Include="Controllers\SettingsAdminController.cs" />
     <Compile Include="Core\BLL\UserManager.cs" />
     <Compile Include="Core\DAL\UserGateway.cs" />
     <Compile Include="Global.asax.cs">
@@ -208,8 +209,27 @@
     <Compile Include="Migrations\201612181528278_addtimeincomment.Designer.cs">
       <DependentUpon>201612181528278_addtimeincomment.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612220722197_addadminmodel.cs" />
+    <Compile Include="Migrations\201612220722197_addadminmodel.Designer.cs">
+      <DependentUpon>201612220722197_addadminmodel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612220829291_changepasswordtype.cs" />
+    <Compile Include="Migrations\201612220829291_changepasswordtype.Designer.cs">
+      <DependentUpon>201612220829291_changepasswordtype.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612220937384_deletetimefromadminmodel.cs" />
+    <Compile Include="Migrations\201612220937384_deletetimefromadminmodel.Designer.cs">
+      <DependentUpon>201612220937384_deletetimefromadminmodel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612221138225_addallmessagemodel.cs" />
+    <Compile Include="Migrations\201612221138225_addallmessagemodel.Designer.cs">
+      <DependentUpon>201612221138225_addallmessagemodel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AdminControl.cs" />
     <Compile Include="Models\Comment.cs" />
+    <Compile Include="Models\MessageToAdmin.cs" />
+    <Compile Include="Models\MessageToUser.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserJoinComment.cs" />
     <Compile Include="Models\UserPost.cs" />
@@ -271,8 +291,13 @@
     <Content Include="Views\Shared\EditorTemplates\tinymce_jquery_full.cshtml" />
     <Content Include="Views\Registration\RegsteredUserInfo.cshtml" />
     <Content Include="Views\Post\Searching.cshtml" />
+    <Content Include="Views\SettingsAdmin\Create.cshtml" />
+    <Content Include="Views\SettingsAdmin\Login.cshtml" />
+    <Content Include="Views\SettingsAdmin\AdminWorld.cshtml" />
+    <Content Include="Views\SettingsAdmin\EditInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="AdminFolder\" />
     <Folder Include="App_Data\" />
     <Folder Include="Images\" />
   </ItemGroup>
@@ -310,6 +335,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612181528278_addtimeincomment.resx">
       <DependentUpon>201612181528278_addtimeincomment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612220722197_addadminmodel.resx">
+      <DependentUpon>201612220722197_addadminmodel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612220829291_changepasswordtype.resx">
+      <DependentUpon>201612220829291_changepasswordtype.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612220937384_deletetimefromadminmodel.resx">
+      <DependentUpon>201612220937384_deletetimefromadminmodel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612221138225_addallmessagemodel.resx">
+      <DependentUpon>201612221138225_addallmessagemodel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

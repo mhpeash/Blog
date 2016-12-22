@@ -14,5 +14,10 @@ namespace ProblemsBlog.Context
         public DbSet<UserPost> Post { get; set; }
 
         public DbSet<Comment> Comments { get; set; }
-            }
+
+        public DbSet<AdminControl> TblAdminControls { get; set; }
+
+        public DbSet<MessageToAdmin> TblFromUser { get; set; }
+        public DbSet<MessageToUser> TblToUser { get; set; }
+    }
 }

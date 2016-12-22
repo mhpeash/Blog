@@ -74,6 +74,8 @@ C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\bin\Microso
 C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\bin\Newtonsoft.Json.dll
 C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\bin\Owin.dll
+C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\bin\PagedList.dll
+C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\bin\PagedList.Mvc.dll
 C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\bin\System.Web.Helpers.dll
 C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\bin\System.Web.Mvc.dll
 C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\bin\System.Web.Optimization.dll
@@ -82,6 +84,8 @@ C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\bin\System.
 C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\bin\System.Web.WebPages.dll
 C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\bin\System.Web.WebPages.Razor.dll
 C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\bin\WebGrease.dll
+C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\bin\PagedList.xml
+C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\bin\PagedList.Mvc.xml
 C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\bin\System.Web.Helpers.xml
 C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\bin\System.Web.Mvc.xml
 C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\bin\System.Web.Optimization.xml
@@ -112,13 +116,13 @@ C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\obj\Debug\P
 C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\obj\Debug\ProblemsBlog.Migrations.allowhtmltomodel.resources
 C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\obj\Debug\ProblemsBlog.Migrations.testforremovedatatypeinmodel.resources
 C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\obj\Debug\ProblemsBlog.Migrations.joinwithuserandcomment.resources
+C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\obj\Debug\ProblemsBlog.Migrations.deletejoindbset.resources
+C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\obj\Debug\ProblemsBlog.Migrations.addtimeincomment.resources
+C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\obj\Debug\ProblemsBlog.Migrations.addadminmodel.resources
+C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\obj\Debug\ProblemsBlog.Migrations.changepasswordtype.resources
 C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\obj\Debug\ProblemsBlog.csproj.GenerateResource.Cache
 C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\obj\Debug\ProblemsBlog.dll
 C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\obj\Debug\ProblemsBlog.pdb
 C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\obj\Debug\ProblemsBlog.csprojResolveAssemblyReference.cache
-C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\obj\Debug\ProblemsBlog.Migrations.deletejoindbset.resources
-C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\obj\Debug\ProblemsBlog.Migrations.addtimeincomment.resources
-C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\bin\PagedList.dll
-C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\bin\PagedList.Mvc.dll
-C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\bin\PagedList.xml
-C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\bin\PagedList.Mvc.xml
+C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\obj\Debug\ProblemsBlog.Migrations.deletetimefromadminmodel.resources
+C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\obj\Debug\ProblemsBlog.Migrations.addallmessagemodel.resources

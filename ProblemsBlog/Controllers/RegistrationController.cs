@@ -86,10 +86,11 @@ namespace ProblemsBlog.Controllers
             if (db.Users.Any(a => a.UserName == user.UserName || a.Email == user.Email))
 
             {
-                ViewBag.Message = "Username or Email Already Registered";
+                ViewBag.Message = db.Users.Any(a => a.UserName == user.UserName) ? "User Name Already Registered" : " Email Already Registered";
+
+
                 return View();
             }
-
 
 
             if (file == null)
@@ -278,8 +279,7 @@ namespace ProblemsBlog.Controllers
         {
             
             
-            
-            
+           
             if (file != null)
             {
                 string filename = System.IO.Path.GetFileName(file.FileName);

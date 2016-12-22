@@ -1,0 +1,110 @@
+﻿@model ProblemsBlog.Models.AdminControl
+@using ProblemsBlog.Models
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Login-Hekkur|Diary</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        
+        <div class="container" >
+            <div class="row" style="margin-top: 200px">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4">
+                    @using (Html.BeginForm("Create", "SettingsAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <h1> Admin Registration</h1> <hr />
+        @Html.ValidationSummary(true)
+        <div class="form-group">
+            @Html.LabelFor(model => model.AdminName, new { @class = "control-label col-md-6" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.AdminName)
+                @Html.ValidationMessageFor(model => model.AdminName)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, new { @class = "control-label col-md-6" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.Password)
+                @Html.ValidationMessageFor(model => model.Password)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ConfirmPassword, new { @class = "control-label col-md-6" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.ConfirmPassword)
+                @Html.ValidationMessageFor(model => model.ConfirmPassword)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Picture, new { @class = "control-label col-md-6" })
+            <div class="col-md-6">
+                <input type="file" name="file" id="myfile" />&nbsp;&nbsp;&nbsp;
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-8 col-md-4">
+                <input type="submit" value="Create Account" class="btn btn-warning" id="isubmit" />
+            </div>
+        </div>
+
+
+
+    </div>
+
+}
+                </div>
+                <div class="col-sm-4"></div>
+            </div>
+        </div>
+        
+        
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
+        <script type="text/javascript">
+            $('#isubmit').click(function (e) {
+
+                if (window.File && window.FileReader && window.FileList && window.Blob) {
+                    //get the file size and file type from file input field
+                    var fsize = $('#myfile')[0].files[0].size;
+
+
+                    if (fsize > 2097152) //do something if file size more than 1 mb (1048576)
+                    {
+
+                        alert(fsize + " bites\n Image size must be less than 2Mb");
+                        e.preventDefault();
+
+                    } 
+                        
+
+                }
+            });
+
+
+        </script>
+
+
+
+
+
+
+        
+        
+        
+
+    </body>
+</html>

@@ -1,0 +1,68 @@
+﻿@{
+    Layout = null;
+}
+@model ProblemsBlog.Models.AdminControl
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login-Hekkur|Diary</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4" style="margin-top:200px">
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+                            <h1> Admin Login</h1>
+                            <hr />
+                            @Html.ValidationSummary(true)
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.AdminName, new { @class = "control-label col-md-4" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.AdminName)
+
+                                    @Html.ValidationMessageFor(model => model.AdminName)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Password, new { @class = "control-label col-md-4" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.Password)
+                                    @Html.ValidationMessageFor(model => model.Password)
+
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class="col-md-offset-7 col-md-5">
+                                    <input type="submit" value="Login" class="btn btn-warning" />
+                                </div>
+                            </div>
+                            
+                            <h4 style="color:blue">@ViewBag.Message</h4>
+
+                        </div>
+                        
+                    }
+                </div>
+
+                <div class="col-sm-4"></div>
+            </div>
+        </div>
+
+    </body>
+</html>
