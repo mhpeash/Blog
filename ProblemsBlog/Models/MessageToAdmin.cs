@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using Microsoft.Owin.Security.DataHandler.Serializer;
 
 namespace ProblemsBlog.Models
@@ -17,6 +18,7 @@ namespace ProblemsBlog.Models
         public string MessageSubject { get; set; }
 
         [Required]
+        [AllowHtml]
         [Display(Name = "Message")]
         public string UserMessage { get; set; }
 

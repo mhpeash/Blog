@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace ProblemsBlog.Models
 {
@@ -13,6 +14,7 @@ namespace ProblemsBlog.Models
         [Display(Name="Message Title")]
         public string MessageTitle { get; set; }
 
+        [AllowHtml]
         [Display(Name = "Admin Message")]
         public string AdminMessage { get; set; }
 

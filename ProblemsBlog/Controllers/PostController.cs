@@ -289,8 +289,28 @@ namespace ProblemsBlog.Controllers
 
 
         public ActionResult DeletePost(int id)
-        {
+        {  
+            
             UserPost userpost = db.Post.Find(id);
+
+
+            int testid = Convert.ToInt32(Session["UserId"]);
+
+            if (userpost.UserId != testid)
+            {
+                
+             
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                
+               
+            }
+           
+
+
+
+
+
+
             db.Post.Remove(userpost);
             db.SaveChanges();
             return RedirectToAction("UserProfile", "Registration");

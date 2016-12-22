@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using ProblemsBlog.Context;
 using ProblemsBlog.Models;
 
@@ -96,10 +97,77 @@ namespace ProblemsBlog.Controllers
                 {
                     return RedirectToAction("Login");
                 }
-                
-               
-                 return View(admin);
+
+            ViewBag.AdminControl = admin;   
+
+            //end admin basic info
+
+            //last 5 New User
+            ViewData["LatestNewUser"]=db.Users.OrderByDescending(i => i.UserId).Take(5);
+            //last 5 Post
+            ViewData["Latestpost"]=db.Post.OrderByDescending(p => p.Time).Take(5);
+
+
+
+                 return View();
               
+        }
+
+
+        [HttpPost]
+        public ActionResult AdminWorld( MessageToUser message)
+        {
+            //ADMIN INFO
+            
+            if (Session["Adminid"] == null)
+            {
+                return RedirectToAction("Login");
+            }
+
+
+            AdminControl admin = db.TblAdminControls.Find(Session["Adminid"]);
+            if (admin == null)
+            {
+                return RedirectToAction("Login");
+            }
+
+            ViewBag.AdminControl = admin;
+            //ADMIN INFO ends here
+
+            //last 5 New User
+            ViewData["LatestNewUser"] = db.Users.OrderByDescending(i => i.UserId).Take(5);
+            //last 5 Post
+            ViewData["Latestpost"] = db.Post.OrderByDescending(p => p.Time).Take(5);
+
+
+
+            //set date for user message
+            message.Date = DateTime.Now;
+            if (ModelState.IsValid)
+            {
+                db.TblToUser.Add(message);
+                db.SaveChanges();
+                return RedirectToAction("AdminWorld");
+            }
+
+            return View(message);
+        }
+
+       
+
+        public ActionResult AdminLogout()
+        {
+            Session.Clear();
+            Session.RemoveAll();
+            Session.Abandon();
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.Cache.SetExpires(DateTime.Now.AddSeconds(-1));
+            Response.Cache.SetNoStore();
+
+            FormsAuthentication.SignOut();
+
+            
+            return RedirectToAction("Login");
         }
 
 
@@ -137,5 +205,10 @@ namespace ProblemsBlog.Controllers
             return View(admin);
 
         }
+
+
+
+
+
     }
 }
