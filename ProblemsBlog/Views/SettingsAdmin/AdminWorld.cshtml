@@ -44,6 +44,9 @@
             color: white;
         }
         
+        h2 {
+            color: white;
+        }
     </style>
     
 
@@ -68,11 +71,14 @@
                     <div id="t">
                         <a href="/SettingsAdmin/AdminLogout" style="text-decoration: none">Logout</a>
                     </div>
+                    <div id="t">
+                        <a href="/SettingsAdmin/PostDetails " style="text-decoration: none">Check User Post</a>
+                    </div>
                 
                     
 
                 </div>
-                <div class="col-sm-6 well">
+                <div class="col-sm-4 well">
                     
                     @using (Html.BeginForm("AdminWorld", "SettingsAdmin", FormMethod.Post))
                     {
@@ -123,14 +129,14 @@
                 </div>
                 <div class="col-sm-2 well">
                     
-                    
+                    <h2>NEW USER</h2>
                     
 
                     @{ IEnumerable<User> usr = ViewData["LatestNewUser"] as IEnumerable<User>;}
                     
                     @if (usr != null)
                     {
-                        <text>New User</text> 
+                     
     foreach (var v in usr)
     {
         <p style="padding: 5px;color: white">Name:@v.Name<br>
@@ -142,18 +148,48 @@
 
 </div>
                 <div class="col-sm-2 well">
+                    <h2>LATEST POST</h2>
                     @{ IEnumerable<UserPost> post = ViewData["Latestpost"] as IEnumerable<UserPost>;}
                     @if (post != null)
                     {
-                       <text>Latest Post</text>
+                        
                         foreach (var p in post)
                         {
                             <p style="padding: 5px;color: white">
                                 Title:@p.PostTitle<br>
-                                <img src="/@p.Image" width="100" height="100" class="img-circle" /><hr><hr>
+                               
+                                <img src="/@p.Image" width="100" height="100" class="img-circle" /><br>
+                                Autor:@p.Author<hr><hr>
                             </p>
                         }
                     }
+
+                </div>
+                @*TOTAL NUMBER OB USER NAD POST*@
+                <div class="col-sm-2">
+                    <div id="t">
+                        <h3> Total User:@ViewBag.Value</h3>
+                    </div>
+                    <div id="t">
+                        <h3> Total Post:@ViewBag.TotalPost</h3>
+                    </div>
+                    
+                    <div style="padding: 50px; background-color: #ffd24d; ">
+                        <h2><kbd>Search</kbd></h2> <hr>
+                        @using (@Html.BeginForm("PostDetails", "SettingsAdmin", FormMethod.Get))
+                        {
+
+                            @Html.RadioButton("searchBy", "Author", true) <text>Author</text>
+                            @Html.RadioButton("searchBy", "Title") <text>Title</text>
+                            @Html.TextBox("searchitem")
+                            <input type="submit" value="search" class="btn btn-warning" />
+                        }
+                    </div>
+                    
+                    
+                    
+                    
+                    
 
                 </div>
             </div>

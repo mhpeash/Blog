@@ -1,0 +1,131 @@
+﻿
+@using PagedList.Mvc
+@using PagedList
+@using ProblemsBlog.Models
+@model PagedList.IPagedList<ProblemsBlog.Models.UserPost>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>PostDetails</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Rubik+Mono+One" rel="stylesheet">
+    
+    <style>
+        .list-inline li:hover {
+            background-color:rgba(0,0,0,0.3);
+            color: white;
+        }
+
+        .list-inline li {
+            border: 2px solid black;
+            font-size: 20px;
+            padding: 10px;
+            text-decoration: none;
+        }
+        </style>
+</head>
+    <body>
+        
+        
+        
+        <div class="container-fluid well text-center" style="border-radius:0px  ">
+            
+            <ul class="list-inline" >
+               <li> <a href="/SettingsAdmin/AdminWorld" style="text-decoration: none;color: black">Admin Profile</a></li>
+               <li> <a href="/SettingsAdmin/AdminLogout" style="text-decoration: none; color: black">Logout</a></li>
+            </ul>
+
+
+        </div>
+
+        <div class="container text-center">
+            <div class="jumbotron">
+                <div class="well " style="padding: 50px">
+                    <h1>Search</h1> <hr>
+                    @using (@Html.BeginForm("PostDetails", "SettingsAdmin", FormMethod.Get))
+                    {
+
+                        @Html.RadioButton("searchBy", "Author", true) <text>Author</text>
+                        @Html.RadioButton("searchBy", "Title") <text>Title</text>
+                        @Html.TextBox("searchitem")
+                        <input type="submit" value="search" class="btn btn-warning" />
+                    }
+                </div>
+
+            </div>
+        </div>
+        
+       
+
+
+
+
+
+
+        
+    
+            @if (Model.Count() == 0)
+            {
+                <h2>Sorry :( No Result Found</h2>
+            }
+
+            else
+            {
+               
+                foreach (var item in Model)
+                {
+                    
+                    
+                      
+                    <div style="border: 1px solid black;padding: 10px">
+                        
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <img src="/@Html.DisplayFor(modelItem => item.Image)" width="500" height="400" class="img-responsive img-thumbnail" />
+
+                                    <h4> <kbd>UserId:@Html.DisplayFor(modelItem => item.UserId)</kbd></h4>
+                                </div>
+                                
+                                  
+                               
+                                <div class="col-sm-7">
+                                    <h2> @Html.DisplayFor(modelItem => item.PostTitle)</h2>
+                                    <h3> <kbd>Published on:@Html.DisplayFor(modelItem => item.Time)</kbd></h3>
+                                    <p> @Html.Raw(item.PostContent)</p>
+                                    <h3>Author:@Html.DisplayFor(modelItem => item.Author)</h3>
+                                    <ul class="list-inline">
+                                        <li><a href="/SettingsAdmin/SingleUserPost/@item.UserPostId " style="text-decoration: none;color: black">View Detail</a></li>
+                                        <li><a href="/SettingsAdmin/DeletePost/@item.UserPostId " style="text-decoration: none; color: black">Delete Post</a></li>
+                                    </ul> 
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                       
+                        
+                        
+                }
+    
+            }
+        <div class="text-center">
+            @Html.PagedListPager(Model, page => Url.Action("PostDetails", new { page, searchBy = Request.QueryString["searchBy"], searchitem = Request.QueryString["searchitem"] }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded })
+
+        </div>        
+        
+
+
+
+
+         
+  
+       
+    </body>
+</html>

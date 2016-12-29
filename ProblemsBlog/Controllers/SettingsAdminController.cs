@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using Microsoft.Ajax.Utilities;
+using PagedList;
 using ProblemsBlog.Context;
 using ProblemsBlog.Models;
 
@@ -86,6 +89,8 @@ namespace ProblemsBlog.Controllers
 
         public ActionResult AdminWorld()
         {
+            
+            //admin basic info
             if (Session["Adminid"] == null)
             {
                 return RedirectToAction("Login");
@@ -104,10 +109,15 @@ namespace ProblemsBlog.Controllers
 
             //last 5 New User
             ViewData["LatestNewUser"]=db.Users.OrderByDescending(i => i.UserId).Take(5);
-            //last 5 Post
+            //last 5New Post
             ViewData["Latestpost"]=db.Post.OrderByDescending(p => p.Time).Take(5);
+            //totaluser
+            int a = db.Users.Count();
+            ViewBag.Value = a;
 
-
+            //total Post
+             int b= db.Post.Count();
+            ViewBag.TotalPost = b;
 
                  return View();
               
@@ -139,6 +149,13 @@ namespace ProblemsBlog.Controllers
             //last 5 Post
             ViewData["Latestpost"] = db.Post.OrderByDescending(p => p.Time).Take(5);
 
+            //totaluser
+            int a = db.Users.Count();
+            ViewBag.Value = a;
+
+            //total Post
+            int b = db.Post.Count();
+            ViewBag.TotalPost = b;
 
 
             //set date for user message
@@ -153,7 +170,114 @@ namespace ProblemsBlog.Controllers
             return View(message);
         }
 
-       
+        public ActionResult PostDetails(string searchBy, string searchitem, int? page)
+        {
+            if (Session["Adminid"] == null)
+            {
+                return RedirectToAction("Login");
+            }
+
+            if (searchBy == "Author")
+            {
+
+                return View(db.Post.Where(e => e.Author.StartsWith(searchitem) || searchitem == null).ToList().ToPagedList(page ?? 1, 5));
+            }
+            else
+            {
+                return View(db.Post.Where(e => e.PostTitle.StartsWith(searchitem) || searchitem == null).ToList().ToPagedList(page ?? 1, 5));
+
+
+            }
+        }
+
+        public ActionResult SingleUserPost( int? id)
+        {
+            if (Session["Adminid"] == null)
+            {
+                return RedirectToAction("Login");
+            }
+
+            if (id  == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+           
+            UserPost userpost = db.Post.Find(id);
+
+            if (userpost == null)
+            {
+                return HttpNotFound();
+            }
+
+            //send user basic info to profile
+
+            ViewBag.UserPost = userpost;
+
+          
+
+            // commenter name and image
+
+            var joinimage = (from usr in db.Users
+                             join cmnt in db.Comments on usr.UserId equals cmnt.UserId
+                             where cmnt.PostId == id
+                             select new
+                             {
+                                 usr.Name,
+                                 usr.Image,
+                                 cmnt.UserComment,
+                                 cmnt.Time
+
+                             }).ToList();
+            List<UserJoinComment> aJoinCommentList = new List<UserJoinComment>();
+
+
+            {
+                foreach (var v in joinimage)
+                {
+                    UserJoinComment aJoinComment = new UserJoinComment();
+
+                    aJoinComment.Comment = v.UserComment;
+                    aJoinComment.CommenterName = v.Name;
+                    aJoinComment.Image = v.Image;
+                    aJoinComment.Time = v.Time;
+                    aJoinCommentList.Add(aJoinComment);
+                    ViewData["CommentsData"] = aJoinCommentList;
+
+                }
+            }
+
+
+
+            return View();
+
+           
+        }
+
+
+
+        public ActionResult DeletePost(int id)
+        {
+
+            
+            if (Session["Adminid"]!=null)
+            {
+                UserPost userpost = db.Post.Find(id);
+                db.Post.Remove(userpost);
+                db.SaveChanges();
+                return RedirectToAction("PostDetails", "SettingsAdmin");
+ 
+ 
+
+            }
+            return RedirectToAction("Login");
+
+        }
+
+
+
+
+
 
         public ActionResult AdminLogout()
         {
@@ -174,6 +298,11 @@ namespace ProblemsBlog.Controllers
 
         public ActionResult EditInfo(int? id)
         {
+            if (Session["Adminid"] == null)
+            {
+                return RedirectToAction("Login");
+            }
+
             if (id == null)
             {
                 return RedirectToAction("Login");

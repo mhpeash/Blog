@@ -295,6 +295,8 @@
     <Content Include="Views\SettingsAdmin\Login.cshtml" />
     <Content Include="Views\SettingsAdmin\AdminWorld.cshtml" />
     <Content Include="Views\SettingsAdmin\EditInfo.cshtml" />
+    <Content Include="Views\SettingsAdmin\PostDetails.cshtml" />
+    <Content Include="Views\SettingsAdmin\SingleUserPost.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AdminFolder\" />

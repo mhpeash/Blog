@@ -65,13 +65,7 @@ namespace ProblemsBlog.Controllers
 
             int postid = Convert.ToInt32(Session["PostId"]);
 
-            //select all comments by postid
-
-            //ViewData["AllComments"] = db.Comments.Where(p => p.PostId == postid);
             
-          
-
-
 
             //join value of comenter pic and comment
 
@@ -304,13 +298,7 @@ namespace ProblemsBlog.Controllers
                 
                
             }
-           
-
-
-
-
-
-
+         
             db.Post.Remove(userpost);
             db.SaveChanges();
             return RedirectToAction("UserProfile", "Registration");
