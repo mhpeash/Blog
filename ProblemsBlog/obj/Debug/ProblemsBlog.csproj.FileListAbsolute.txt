@@ -126,3 +126,4 @@ C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\obj\Debug\P
 C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\obj\Debug\ProblemsBlog.csprojResolveAssemblyReference.cache
 C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\obj\Debug\ProblemsBlog.Migrations.deletetimefromadminmodel.resources
 C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\obj\Debug\ProblemsBlog.Migrations.addallmessagemodel.resources
+C:\Users\Peash-Desktop\Desktop\HekkurDiary\ProblemsBlog\ProblemsBlog\obj\Debug\ProblemsBlog.Migrations.addemailmessagetoadminclass.resources

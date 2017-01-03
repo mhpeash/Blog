@@ -225,6 +225,10 @@
     <Compile Include="Migrations\201612221138225_addallmessagemodel.Designer.cs">
       <DependentUpon>201612221138225_addallmessagemodel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701031630525_addemailmessagetoadminclass.cs" />
+    <Compile Include="Migrations\201701031630525_addemailmessagetoadminclass.Designer.cs">
+      <DependentUpon>201701031630525_addemailmessagetoadminclass.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AdminControl.cs" />
     <Compile Include="Models\Comment.cs" />
@@ -297,6 +301,7 @@
     <Content Include="Views\SettingsAdmin\EditInfo.cshtml" />
     <Content Include="Views\SettingsAdmin\PostDetails.cshtml" />
     <Content Include="Views\SettingsAdmin\SingleUserPost.cshtml" />
+    <Content Include="Views\Registration\ContactToAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AdminFolder\" />
@@ -349,6 +354,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612221138225_addallmessagemodel.resx">
       <DependentUpon>201612221138225_addallmessagemodel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701031630525_addemailmessagetoadminclass.resx">
+      <DependentUpon>201701031630525_addemailmessagetoadminclass.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

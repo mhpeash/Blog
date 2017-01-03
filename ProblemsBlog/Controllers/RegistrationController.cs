@@ -172,6 +172,10 @@ namespace ProblemsBlog.Controllers
                 //latest post
                 ViewData["LatestPost"]=db.Post.OrderByDescending(p => p.Time).Take(3);
 
+                //admin message
+                 MessageToUser aMessageToUser =  db.TblToUser.FirstOrDefault();
+                ViewBag.MessageToUser = aMessageToUser;
+
                 return View();
             }
 
@@ -195,6 +199,15 @@ namespace ProblemsBlog.Controllers
 
                 //latest post
                 ViewData["LatestPost"] = db.Post.OrderByDescending(p => p.Time).Take(2);
+
+                //admin message
+                MessageToUser aMessageToUser = db.TblToUser.FirstOrDefault();
+                ViewBag.MessageToUser = aMessageToUser;
+
+
+
+
+
 
 
                 userPost.UserId = Convert.ToInt32(Session["UserId"]);
@@ -299,8 +312,37 @@ namespace ProblemsBlog.Controllers
             return View(user);
         }
 
+        public ActionResult ContactToAdmin()
+        {
+            return View();
+        }
 
+        [HttpPost]
+        public ActionResult ContactToAdmin( MessageToAdmin userMessageToAdmin)
+        {
+            if (Session["UserId"]!=null)
+            {
+                userMessageToAdmin.UserName = Session["Username"].ToString();
+                userMessageToAdmin.UserId = Convert.ToInt32(Session["UserId"]);
+                
+            }
+            userMessageToAdmin.UserName = "Guest";
+            userMessageToAdmin.Time = DateTime.Now;
 
+            if (ModelState.IsValid)
+            {
+                db.TblFromUser.Add(userMessageToAdmin);
+                db.SaveChanges();
+                if (Session["UserId"] != null)
+                {
+                    return RedirectToAction("UserHome", "Post");
+                }
+                return RedirectToAction("Home","Post");
+
+            }
+
+            return View(userMessageToAdmin);
+        }
 
         // GET: /Registration/Delete/5
         public ActionResult Delete(int? id)
