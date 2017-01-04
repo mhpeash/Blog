@@ -337,6 +337,16 @@ namespace ProblemsBlog.Controllers
 
 
 
+        public ActionResult CheckUserMessages()
+        {
+            if (Session["Adminid"] == null)
+            {
+                return RedirectToAction("Login");
+            }
+
+
+            return View(db.TblFromUser.OrderByDescending(e => e.Time).ToList());
+        }
 
 
     }
