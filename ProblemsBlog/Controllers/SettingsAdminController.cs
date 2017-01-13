@@ -277,7 +277,16 @@ namespace ProblemsBlog.Controllers
 
 
 
+        public ActionResult PostReview()
+        {
 
+            if (Session["Adminid"] == null)
+            {
+                return RedirectToAction("Login");
+            }
+            
+            return View(db.Post.Where(a=>a.Tempvalue==1));
+        }
 
         public ActionResult AdminLogout()
         {

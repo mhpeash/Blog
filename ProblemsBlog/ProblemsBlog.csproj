@@ -303,6 +303,7 @@
     <Content Include="Views\SettingsAdmin\SingleUserPost.cshtml" />
     <Content Include="Views\Registration\ContactToAdmin.cshtml" />
     <Content Include="Views\SettingsAdmin\CheckUserMessages.cshtml" />
+    <Content Include="Views\SettingsAdmin\PostReview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AdminFolder\" />
