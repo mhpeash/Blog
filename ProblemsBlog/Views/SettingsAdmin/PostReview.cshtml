@@ -54,7 +54,7 @@
                         <img src="/@Html.DisplayFor(modelItem=>item.Image)" class="img-responsive img-thumbnail" >
 
                     </div>
-                    <div class="col-sm-8">
+                    <div class="col-sm-7">
                         <h1>@Html.DisplayFor(modelItem => item.PostTitle)</h1> <hr>
                         <h2>
                             <kbd>Id @Html.DisplayFor(modelItem => item.UserId)</kbd> |
@@ -64,6 +64,10 @@
                         <h4>@Html.Raw(item.PostContent)</h4>
 
                         <hr>
+                    </div>
+                    <div class="col-sm-1">
+                        <a href="/SettingsAdmin/CorfirmedPostReview/@Html.DisplayFor(modelItem=>item.UserPostId)" style="padding: 5px;text-align: center;border: 1px dashed">Authorized</a>
+                     
                     </div>
                 
                 </div>

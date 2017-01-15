@@ -26,7 +26,7 @@ namespace ProblemsBlog.Controllers
         {
             //latest post
             ViewData["LatestPost"] = db.Post.OrderByDescending(p => p.Time).Take(3); 
-            return View(db.Post.OrderByDescending(x => x.Time).ToList());
+            return View(db.Post.Where(x=>x.Tempvalue==0).OrderByDescending(x => x.Time).ToList());
 
          
         }
@@ -39,7 +39,7 @@ namespace ProblemsBlog.Controllers
             }
             //latest post
             ViewData["LatestPost"] = db.Post.OrderByDescending(p => p.Time).Take(3);
-            return View(db.Post.OrderByDescending(x => x.Time).ToList());
+            return View(db.Post.Where(x => x.Tempvalue == 0).OrderByDescending(x => x.Time).ToList());
         }
 
         //Single PostDetails Details

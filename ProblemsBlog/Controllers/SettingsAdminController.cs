@@ -285,7 +285,33 @@ namespace ProblemsBlog.Controllers
                 return RedirectToAction("Login");
             }
             
-            return View(db.Post.Where(a=>a.Tempvalue==1));
+            return View(db.Post.Where(a=>a.Tempvalue==1).OrderByDescending(a=>a.Time));
+        }
+
+        
+        public ActionResult CorfirmedPostReview( int? id)
+        {
+            if (Session["Adminid"] == null)
+            {
+                RedirectToAction("Login");
+            }
+
+
+            if (id != null)
+            {
+                UserPost apost = db.Post.Find(id);
+                apost.Tempvalue = 0;
+
+                if (ModelState.IsValid)
+                {
+                    db.Entry(apost).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("PostReview");
+                }
+
+            }
+  
+            return RedirectToAction("PostReview");
         }
 
         public ActionResult AdminLogout()
