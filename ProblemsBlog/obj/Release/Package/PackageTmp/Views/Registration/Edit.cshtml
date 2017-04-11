@@ -1,0 +1,332 @@
+﻿@model ProblemsBlog.Models.User
+@{
+    Layout=null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>UserInfo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Patua+One" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+
+    <style>
+        body {
+            background-color: #e6e6e6;
+        }
+
+        .navbar {
+            border: 0;
+            font-size: 15px !important;
+            line-height: 1.42857143 !important;
+            letter-spacing: 3px;
+            border-radius: 0;
+            font-family: Montserrat, sans-serif;
+            background-color: rgb(255,204,51);
+        }
+
+            .navbar li a, .navbar .navbar-brand {
+                color: #fff !important;
+            }
+
+        .navbar-nav li a:hover, .navbar-nav li.active a {
+            color: black !important;
+            /*//background-color: #E84C4C !important;*/
+            background-color: #fff !important;
+        }
+
+        .navbar-inverse .navbar-toggle {
+            border-color: transparent;
+            color: #fff !important;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+
+        footer a:hover {
+            color: #ffd24d;
+            text-decoration: none;
+        }
+
+
+        #coverphoto {
+            background-image: url("/Images/1.1.gif");
+            background-repeat: no-repeat;
+            background-size: 100% 40%;
+        }
+
+        .well {
+            background-color: white;
+            font-family: 'Patua One',cursive;
+            /*letter-spacing: 1px;*/
+        }
+
+
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+
+            li a:hover, .dropdown:hover .dropbtn {
+                background-color: rgb(255,204,51);
+            }
+
+        li.dropdown {
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: rgb(255,204,51);
+            color: white;
+            min-width: 150px;
+        }
+
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+                text-align: left;
+            }
+
+                .dropdown-content a:hover {
+                    background-color: #f9f9f9;
+                }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .contfor {
+            width: 100px;
+            height: 5px;
+        }
+
+        .texarea {
+            width: 60%;
+            height: 20%;
+        }
+
+        .form-group .btn:hover {
+            color: #313131;
+            box-shadow: 5px 5px 5px #888887;
+        }
+
+        #bg1 {
+            background-image: url("/Images/2.png");
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            padding: 0px;
+            margin-top: 0px;
+        }
+
+        #rowbg {
+            background-color: rgba(0,0,0,0.5);
+            height: 947px;
+            width: 100%;
+            margin: 0px;
+        }
+
+        .control-label {
+            color: white;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/Post/UserHome">POPS-Blog</a>
+            </div><!--end navheader-->
+
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropbtn">
+                            <span class="glyphicon glyphicon-wrench"></span>Change-Password
+                        </a>
+                        <div class="dropdown-content">
+                            <a href="/Registration/Edit/@Session["UserId"]">Edit Info</a>
+                            <a href="#">Change Coverphoto</a>
+                            <a href="#">Change ProfilePicture</a>
+                        </div>
+                    </li>
+                    <li><a href="#"><span class="glyphicon glyphicon-send"></span>Contact-Admin</a></li>
+                    <li><a href="/Registration/UserProfile"> <span class="glyphicon glyphicon-home"></span>User-Profile</a></li>
+                    <li><a href="/Registration/Logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+
+                </ul>
+            </div><!--glyphicon divright-->
+
+        </div> <!--end header container-fluid-->
+    </nav>
+
+
+    @*_____________________________________________________________________________*@
+
+
+    <div class="container-fluid" id="bg1">
+        <div id="rowbg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-4" style="margin-top: 200px">
+                        <h2 style="color: white">Edit Your Information </h2><hr>
+
+                        @using (Html.BeginForm("Edit", "Registration", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-horizontal">
+
+                                @Html.ValidationSummary(true)
+                                @Html.HiddenFor(model => model.UserId)
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-6" })
+                                    <div class="col-md-6">
+                                        @Html.EditorFor(model => model.Name)
+                                        @Html.ValidationMessageFor(model => model.Name)
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-6" })
+                                    <div class="col-md-6">
+                                        @Html.EditorFor(model => model.Email)
+                                        @Html.ValidationMessageFor(model => model.Email)
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.UserName, new { @class = "control-label col-md-6" })
+                                    <div class="col-md-6">
+                                        @Html.EditorFor(model => model.UserName)
+                                        @Html.ValidationMessageFor(model => model.UserName)
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Password, new { @class = "control-label col-md-6" })
+                                    <div class="col-md-6">
+                                        @Html.EditorFor(model => model.Password)
+                                        @Html.ValidationMessageFor(model => model.Password)
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.ConfirmPassword, new { @class = "control-label col-md-6" })
+                                    <div class="col-md-6">
+                                        @Html.EditorFor(model => model.ConfirmPassword)
+                                        @Html.ValidationMessageFor(model => model.ConfirmPassword)
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+
+                                    @Html.LabelFor(model => model.Image, new { @class = "control-label col-md-6" })
+
+                                    <div class="col-md-6">
+                                        @Html.EditorFor(model => model.Image)
+                                        <input type="file" name="file" id="myfile" />&nbsp;&nbsp;&nbsp;
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Location, new { @class = "control-label col-md-6" })
+                                    <div class="col-md-6">
+                                        @Html.EditorFor(model => model.Location)
+                                        @Html.ValidationMessageFor(model => model.Location)
+                                    </div>
+                                </div>
+
+                                <div class="form-group" style="margin-top: 25px">
+                                    <div class="col-md-offset-7 col-md-5">
+                                        <input type="submit" value="Update" class="btn btn-warning" id="isubmit" />
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                    <div class="col-sm-4"></div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+            @*_____________________________________________________________________________*@
+
+
+
+            <div class="container-fluid" style="padding:20px;background-color:#313131;color:#E84C4C">
+                <footer>
+                    <div class="row">
+                        <div class="col-sm-4"></div>
+                        <div class="col-sm-4 text-center">
+                            <h4>All Right Reserved By 2016 <a href="https://mhpeash.github.io/Home.html">| mhpeash |</a> </h4>
+                        </div>
+                        <div class="col-sm-4"></div>
+                    </div>
+
+
+                </footer>
+
+            </div>
+
+
+            @*checking image size*@
+
+
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
+            <script type="text/javascript">
+                $('#isubmit').click(function (e) {
+
+                    if (window.File && window.FileReader && window.FileList && window.Blob) {
+                        //get the file size and file type from file input field
+                        var fsize = $('#myfile')[0].files[0].size;
+
+
+                        if (fsize > 2097152) //do something if file size more than 1 mb (1048576)
+                        {
+
+                            alert(fsize + " bites\n Image size must be less than 2Mb");
+                            e.preventDefault();
+
+                        } else {
+                            alert(fsize + " bites\nYou are good to go!");
+                        }
+
+
+                    }
+                });
+
+
+            </script>
+
+
+
+
+
+
+</body>
+</html>

@@ -243,7 +243,7 @@ else
                     <h2 class="well">Search Result</h2><hr>
                     foreach (var item in Model)
                     {
-                   <a href="/Post/Details/@Html.DisplayFor(modelItem=>item.UserPostId)" style="text-decoration: none"><h4>@Html.DisplayFor(modelItem => item.PostTitle)</h4></a><hr>
+                        <a href="/Post/UserSinglePostDetails/@Html.DisplayFor(modelItem=>item.UserPostId)" style="text-decoration: none"><h4>@Html.DisplayFor(modelItem => item.PostTitle)</h4></a><hr>
    
                     }
                    

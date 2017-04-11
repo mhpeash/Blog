@@ -1,0 +1,88 @@
+﻿@model IEnumerable<ProblemsBlog.Models.MessageToAdmin>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>CheckUserMessages</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Patua+One" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        .list-inline li:hover {
+            background-color: rgba(0,0,0,0.3);
+            color: white;
+        }
+
+        .list-inline li {
+            border: 2px solid black;
+            font-size: 20px;
+            padding: 10px;
+            text-decoration: none;
+        }
+    </style>
+
+
+</head>
+<body>
+    
+    <div class="container-fluid well text-center" style="border-radius:0px  ">
+
+        <ul class="list-inline">
+            <li> <a href="/SettingsAdmin/AdminWorld" style="text-decoration: none;color: black">Admin Profile</a></li>
+            <li> <a href="/SettingsAdmin/AdminLogout" style="text-decoration: none; color: black">Logout</a></li>
+        </ul>
+
+
+    </div>
+    
+   
+    <h1 style="text-align: center;margin-bottom: 50px"><kbd>User Complain</kbd></h1>
+    
+    
+       
+    
+        @if (Model != null)
+        {
+             foreach (var item in Model) {
+        
+            <div class="container">
+                <h2> <kbd>@Html.DisplayFor(modelItem => item.MessageToAdminId).@Html.DisplayFor(modelItem => item.MessageSubject)</kbd></h2> <hr>
+                <h4>User-id:
+                    @Html.DisplayFor(modelItem => item.UserId) | @Html.DisplayFor(modelItem => item.Time)  | @Html.DisplayFor(modelItem => item.UserName) | Email:@Html.DisplayFor(modelItem => item.Email)
+   
+                </h4>
+                
+                <div class="well" style="font-size: 20px;margin-top: 20px">
+                    @Html.Raw(item.UserMessage)
+                </div>
+                
+            </div>
+            
+            
+                
+                            
+            
+            
+            
+            
+               
+            
+                               
+            
+    }
+    
+
+            
+        }
+         
+</body>
+</html>
