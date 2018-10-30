@@ -9,7 +9,7 @@ namespace ProblemsBlog.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
             ContextKey = "ProblemsBlog.Context.DatabaseContext";
         }
 

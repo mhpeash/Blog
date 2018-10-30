@@ -1,0 +1,81 @@
+﻿@model IEnumerable<ProblemsBlog.Models.UserPost>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+   
+    <title>PostReview-Hekkur|Diary</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    
+    <style>
+        .list-inline li:hover {
+            background-color: rgba(0,0,0,0.3);
+            color: white;
+        }
+
+        .list-inline li {
+            border: 2px solid black;
+            font-size: 20px;
+            padding: 10px;
+            text-decoration: none;
+        }
+    </style>
+
+
+
+</head>
+<body>
+    
+    <div class="container-fluid well text-center" style="border-radius:0px  ">
+
+        <ul class="list-inline">
+            <li> <a href="/SettingsAdmin/AdminWorld" style="text-decoration: none;color: black">Admin Profile</a></li>
+            <li> <a href="/SettingsAdmin/AdminLogout" style="text-decoration: none; color: black">Logout</a></li>
+        </ul>
+
+
+    </div>
+
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <img src="/@Html.DisplayFor(modelItem=>item.Image)" class="img-responsive img-thumbnail" >
+
+                    </div>
+                    <div class="col-sm-7">
+                        <h1>@Html.DisplayFor(modelItem => item.PostTitle)</h1> <hr>
+                        <h2>
+                            <kbd>Id @Html.DisplayFor(modelItem => item.UserId)</kbd> |
+                            <kbd>@Html.DisplayFor(modelItem => item.Time)</kbd> |
+                            <kbd>@Html.DisplayFor(modelItem => item.Author)</kbd>
+                        </h2>
+                        <h4>@Html.Raw(item.PostContent)</h4>
+
+                        <hr>
+                    </div>
+                    <div class="col-sm-1">
+                        <a href="/SettingsAdmin/CorfirmedPostReview/@Html.DisplayFor(modelItem=>item.UserPostId)" style="padding: 5px;text-align: center;border: 1px dashed">Authorized</a>
+                     
+                    </div>
+                
+                </div>
+            </div>
+        }
+
+    }
+    
+    
+    </body>
+</html>

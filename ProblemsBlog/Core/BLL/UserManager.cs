@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web;
+using ProblemsBlog.Context;
 using ProblemsBlog.Core.DAL;
 using ProblemsBlog.Models;
 
@@ -22,8 +24,8 @@ namespace ProblemsBlog.Core.BLL
             return gateway.GetAllPostbyUserID(userId);
         }
 
-      
-        
-        
+
+
+       
     }
 }

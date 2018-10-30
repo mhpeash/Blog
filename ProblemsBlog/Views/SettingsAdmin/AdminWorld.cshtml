@@ -1,0 +1,212 @@
+﻿@using System.Collections
+@using ProblemsBlog.Models
+@model ProblemsBlog.Models.MessageToUser
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>AdminPanel-Hekkur|Diary</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+    <script>tinymce.init({ selector: '#AdminMessage' });</script>
+    <style>
+        .jumbotron {
+            background-color: #06D996;
+        }
+
+
+        body {
+            background-color: #EBEFF2;
+        }
+        .well {
+            background-color: #222222;
+            border-radius:0px;
+        }
+
+        #t {
+           text-align: center;
+           border: 2px solid black;
+           padding: 5px;
+           font-size: 20px;
+        }
+        #t:hover {
+            background-color: white;
+        }
+
+        .control-label {
+            color: white;
+        }
+        
+        h2 {
+            color: white;
+        }
+    </style>
+    
+
+</head>
+<body>
+
+    <div class="jumbotron text-center">
+        <h1>Welcome To Admin Panel </h1>
+        <p>Today is @DateTime.Now</p>
+    </div>
+
+    <div class="container-fluid" style="margin: 0px">
+       
+            <div class="row">
+                <div class="col-sm-2 text-center well">
+                    <img src="/@ViewBag.AdminControl.Picture" class="img-rounded" width="200" height="200" style="border-radius: 60%" />
+                    <h2 style="color: white">@ViewBag.AdminControl.AdminName</h2>
+                   
+                        <div id="t" style="">
+                            <a href="/SettingsAdmin/EditInfo/@Session["Adminid"]" style="text-decoration: none">Edit Info</a>
+                        </div>
+                    <div id="t">
+                        <a href="/SettingsAdmin/AdminLogout" style="text-decoration: none">Logout</a>
+                    </div>
+                    <div id="t">
+                        <a href="/SettingsAdmin/PostDetails " style="text-decoration: none">Check User Post</a>
+                    </div>
+                    <div id="t">
+                        <a href="/SettingsAdmin/CheckUserMessages" style="text-decoration: none"> User Messages</a>
+                    </div>
+                    <div id="t">
+                        <a href="/SettingsAdmin/PostReview" style="text-decoration: none">Review Post</a>
+                    </div>
+                    
+
+                </div>
+                <div class="col-sm-4 well">
+                    
+                    @using (Html.BeginForm("AdminWorld", "SettingsAdmin", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal" style="padding: 22px">
+                            <h2 style="color: white">Send Message To Users</h2> <hr>
+                            @Html.ValidationSummary(true)
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.MessageTitle, new { @class = "control-label col-md-4 " })
+                                <div class="col-md-8" id="posttextbar">
+                                    @Html.EditorFor(model => model.MessageTitle)
+                                    @Html.ValidationMessageFor(model => model.MessageTitle)
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.AdminMessage, new { @class = "control-label col-md-4" })
+                                <div class="col-md-8" id=" posttextbar">
+                                    @*@Html.EditorFor(model => model.PostContent)*@
+                                    @Html.EditorFor(model => model.AdminMessage)
+                                    <span style="color: rgb(24,188,156)">@Html.ValidationMessageFor(model => model.AdminMessage)</span>
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group">
+
+                                <div class="col-md-offset-4 col-md-8">
+                                    <input type="submit" value="Sent Message" class="btn btn-warning" id="isubmit" />
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    }
+
+                    
+                    
+                    
+                    
+
+                </div>
+                <div class="col-sm-2 well">
+                    
+                    <h2>NEW USER</h2>
+                    
+
+                    @{ IEnumerable<User> usr = ViewData["LatestNewUser"] as IEnumerable<User>;}
+                    
+                    @if (usr != null)
+                    {
+                     
+    foreach (var v in usr)
+    {
+        <p style="padding: 5px;color: white">Name:@v.Name<br>
+                    Email:@v.Email<br><img src="/@v.Image" width="100" height="100" class="img-circle" /><hr><hr></p>
+
+    }
+    }
+    
+
+</div>
+                <div class="col-sm-2 well">
+                    <h2>LATEST POST</h2>
+                    @{ IEnumerable<UserPost> post = ViewData["Latestpost"] as IEnumerable<UserPost>;}
+                    @if (post != null)
+                    {
+                        
+                        foreach (var p in post)
+                        {
+                            <p style="padding: 5px;color: white">
+                                Title:@p.PostTitle<br>
+                               
+                                <img src="/@p.Image" width="200" height="100" class="img-responsive" /><br>
+                                Autor:@p.Author<hr><hr>
+                            </p>
+                        }
+                    }
+
+                </div>
+                @*TOTAL NUMBER OB USER NAD POST*@
+                <div class="col-sm-2">
+                    <div id="t">
+                        <h3> Total User:@ViewBag.Value</h3>
+                    </div>
+                    <div id="t">
+                        <h3> Total Post:@ViewBag.TotalPost</h3>
+                    </div>
+                    
+                    <div style="padding: 50px; background-color: #ffd24d; ">
+                        <h2><kbd>Search</kbd></h2> <hr>
+                        @using (@Html.BeginForm("PostDetails", "SettingsAdmin", FormMethod.Get))
+                        {
+
+                            @Html.RadioButton("searchBy", "Author", true) <text>Author</text>
+                            @Html.RadioButton("searchBy", "Title") <text>Title</text>
+                            @Html.TextBox("searchitem")
+                            <input type="submit" value="search" class="btn btn-warning" />
+                        }
+                    </div>
+                    
+                    
+                    
+                    
+                    
+
+                </div>
+            </div>
+     
+    </div>
+
+    
+            
+
+
+
+
+    
+</body>
+</html>

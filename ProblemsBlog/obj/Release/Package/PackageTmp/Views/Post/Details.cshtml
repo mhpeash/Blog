@@ -1,0 +1,123 @@
+﻿@model ProblemsBlog.Models.Comment
+@using System.Web.UI.WebControls
+@using ProblemsBlog.Models
+
+@{ IEnumerable<UserJoinComment> cmt = ViewData["CommentsData"] as IEnumerable<UserJoinComment>;
+
+    if (cmt == null)
+    {
+        ViewBag.Message = "No Comments Yet";
+    }
+
+    else
+    {
+        Int32 a = cmt.Count();
+        ViewBag.Totalcomment = a;
+        
+    }
+      
+      
+}
+@{
+    ViewBag.Title = "Details";
+}
+
+<link href="~/Content/blog-post.css" rel="stylesheet" />
+<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+<script>tinymce.init({ selector: '#UserComment' });</script>
+<div class="container">
+    <div class="row">
+        <!-- Blog Post Content Column -->
+        <div class="col-lg-8">
+
+            <!-- Title -->
+            <h1>@ViewBag.UserPost.PostTitle</h1>
+            <!-- Date/Time -->
+            <p><span class="glyphicon glyphicon-time"></span> প্রকাশিত হয়েছে- @ViewBag.UserPost.Time</p><hr>
+            <!-- Author -->
+            <p class="lead"> <a href="/Registration/Details/@ViewBag.UserPost.UserId" style="text-decoration: none">লিখেছেন-@ViewBag.UserPost.Author</a></p> <hr>
+            <!-- Preview Image -->
+            <img class="img-responsive" src="/@ViewBag.UserPost.Image"><hr>
+            <!-- Post Content -->
+            <p class="lead">@Html.Raw(@ViewBag.UserPost.PostContent)</p><hr>
+
+            <!-- ......................................................Comments Form -->
+            <div class="well">
+                @*@if(Session["Author"]!=null)
+                {*@
+                    
+                @using (Html.BeginForm())
+                {
+
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+
+                        @Html.ValidationSummary(true)
+
+                        <div class="form-group">
+                            <div class="control-label col-md-4"><h4>Leave a Comment:</h4></div>
+                            <div class="col-md-8">
+                                @Html.TextAreaFor(model => model.UserComment, new { style = "width:400px;height:150px" })
+                                @Html.ValidationMessageFor(model => model.UserComment)
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-5 col-md-7">
+                                <input type="submit" value="Publish" class="btn btn-Primary" />
+                            </div>
+
+                        </div>
+                    </div>
+
+                }
+                @*}*@
+            </div>
+
+        </div> @*end of first col-lg-8*@
+
+        <div class="col-lg-4"></div>
+    </div>
+</div>
+
+<h3>@ViewBag.Message</h3>
+
+
+@if (cmt != null)
+{<h3>মতামত দিয়েছেন:@ViewBag.Totalcomment জন </h3>
+       
+    foreach (UserJoinComment v in cmt)
+    {
+
+        <div class="container ">
+
+            <div class="row well">
+
+                @*Commenter Image*@
+
+
+                <div class="col-sm-4"><img src="/@v.Image" class="img-circle" width="150" height="150" /></div>
+
+
+                @*Comments*@
+
+                <div class="col-sm-4">
+
+                    <h3>
+                        @*Commenter Name*@
+                        @v.CommenterName
+                    </h3>
+                    <span class="glyphicon glyphicon-time"></span>:@v.Time
+                    <hr>
+
+                <p style="float: left"> @Html.Raw(@v.Comment)</p>
+            </div>
+            <div class="col-sm-4"></div>
+        </div>
+
+        </div>
+    }
+}
+
+

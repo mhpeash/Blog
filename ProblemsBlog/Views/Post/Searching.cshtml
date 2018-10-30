@@ -1,0 +1,275 @@
+﻿@using PagedList.Mvc
+@using PagedList 
+@using ProblemsBlog.Models
+@model PagedList.IPagedList<ProblemsBlog.Models.UserPost>
+@{
+    Layout = null;
+}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Home</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Rubik+Mono+One" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            background-color: #F2F2F2;
+        }
+
+
+        .navbar {
+            border: 0;
+            font-size: 15px !important;
+            line-height: 1.42857143 !important;
+            letter-spacing: 3px;
+            border-radius: 0;
+            font-family: Montserrat, sans-serif;
+            background-color: #ffd24d;
+        }
+
+            .navbar li a, .navbar .navbar-brand {
+                color: #fff !important;
+            }
+
+        .navbar-nav li a:hover, .navbar-nav li.active a {
+            color: black !important;
+            background-color: white !important;
+        }
+
+        .navbar-inverse .navbar-toggle {
+            border-color: transparent;
+            color: #fff !important;
+        }
+
+
+        .jumbocontent {
+            font-family: monospace Lucida;
+            text-align: center;
+            padding: 50px;
+            margin-top: 10px;
+            font-weight: bolder;
+        }
+
+        .jumbotron {
+            background-color: #ffd24d;
+            color: white;
+        }
+
+        .row .glyphicon {
+            font-size: 15px;
+            padding-left: 8px;
+            padding-right: 8px;
+            color: gray;
+        }
+
+
+        footer a:hover {
+            color: #ffd24d;
+            text-decoration: none;
+        }
+
+
+        #titlefont {
+            font-family: 'Rubik Mono One',sans-serif;
+            padding-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .well {
+            background-color: #FFFFFF;
+            border: 1px solid #FFFFFF;
+        }
+
+
+            
+        .btn a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .col-sm-6 a:hover 
+        {
+            color:black;  
+        }
+
+
+
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+
+            li a:hover, .dropdown:hover .dropbtn {
+                background-color: rgb(255,204,51);
+            }
+
+        li.dropdown {
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: rgb(255,204,51);
+            color: white;
+            min-width: 150px;
+            /*// box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);*/
+        }
+
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+                text-align: left;
+            }
+
+                .dropdown-content a:hover {
+                    background-color: #f9f9f9;
+                }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+@if (Session["UserId"] == null)
+{
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/Post/Home">POPS-Blog</a>
+            </div><!--end navheader-->
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/Registration/Create"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    <li><a href="/Registration/Login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                </ul>
+            </div><!--glyphicon divright-->
+        </div> <!--end header container-fluid-->
+    </nav>
+}
+else
+{
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/Post/UserHome">POPS-Blog</a>
+        </div><!--end navheader-->
+
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">
+                        <span class="glyphicon glyphicon-wrench"></span>Change-Password
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="/Registration/Edit/@Session["UserId"]">Edit Info</a>
+                        <a href="#">Change Coverphoto</a>
+                        <a href="#">Change ProfilePicture</a>
+                    </div>
+                </li>
+                <li><a href="/Registration/UserProfile"><span class="glyphicon glyphicon-user"></span>Profile</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-send"></span>Contact-Admin</a></li>
+                @*<li><a href="#"> <span class="glyphicon glyphicon-cog"></span>Change-Password</a></li>*@
+                <li><a href="/Registration/Logout"><span class="glyphicon glyphicon-log-out"></span>Logout|@Session["UserName"]</a></li>
+
+            </ul>
+        </div><!--glyphicon divright-->
+
+    </div> <!--end header container-fluid-->
+</nav>
+
+}
+    
+
+    <div class="container-fluid jumbocontent" style="padding:0px">
+        <div class="jumbotron"><h1>ডাইরি</h1></div>
+    </div>
+
+
+
+
+    <div class="container">
+        <div class="row" >
+        <div class="col-sm-4 well "style="padding: 50px">
+                 <h2>Search</h2> <hr>
+                @using (@Html.BeginForm("Searching", "Post", FormMethod.Get))
+                    {
+       
+                     @Html.RadioButton("searchBy", "Author", true) <text>Author</text>
+                     @Html.RadioButton("searchBy", "Title") <text>Title</text><br />
+                     @Html.TextBox("searchitem")
+                     <input type="submit" value="search"  class="btn btn-warning" />
+                     }
+</div>
+            
+   <div class="col-sm-2"> </div>         
+
+<div class="col-sm-6 " style="padding-left: 10px;margin-bottom: 100px">
+                
+                @if (Model.Count() == 0)
+                {
+                    <h2>Sorry :( No Result Found</h2>
+                }
+                else
+                {
+                    
+                    <h2 class="well">Search Result</h2><hr>
+                    foreach (var item in Model)
+                    {
+                        <a href="/Post/UserSinglePostDetails/@Html.DisplayFor(modelItem=>item.UserPostId)" style="text-decoration: none"><h4>@Html.DisplayFor(modelItem => item.PostTitle)</h4></a><hr>
+   
+                    }
+                   
+                }
+    
+    
+    
+    @Html.PagedListPager(Model,page=>Url.Action("Searching",new{page,searchBy=Request.QueryString["searchBy"],searchitem=Request.QueryString["searchitem"]}),new PagedListRenderOptions(){ Display=PagedListDisplayMode.IfNeeded})
+</div>
+            
+        </div>
+    </div>
+
+
+    <div class="container-fluid" style="padding:20px;background-color:#313131;color:#E84C4C;margin-top:150px">
+        <footer>
+            <div class="row">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4 text-center">
+                    <h4>All Right Reserved By 2016 <a href="https://mhpeash.github.io/Home.html">| mhpeash |</a> </h4>
+                </div>
+
+                <div class="col-sm-4"></div>
+            </div>
+
+        </footer>
+    </div>
+</body>
+</html>

@@ -29,6 +29,8 @@ namespace ProblemsBlog.Controllers
         //Single user information details
         public ActionResult Details(int? id)
         {
+            
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -44,7 +46,25 @@ namespace ProblemsBlog.Controllers
             return View(user);
         }
 
-   
+
+
+        public ActionResult RegsteredUserInfo(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            User user = db.Users.Find(id);
+
+            ViewData["TotalPost"] = db.Post.Where(b => b.UserId == id);
+
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(user);
+        }
+
 
         // GET: /Registration/Create
         public ActionResult Create()
@@ -58,6 +78,20 @@ namespace ProblemsBlog.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "UserId,Name,Email,UserName,Password,ConfirmPassword,Image,Location")] User user, HttpPostedFileBase file)
         {
+
+
+
+            //check unique username and email
+
+            if (db.Users.Any(a => a.UserName == user.UserName || a.Email == user.Email))
+
+            {
+                ViewBag.Message = db.Users.Any(a => a.UserName == user.UserName) ? "User Name Already Registered" : " Email Already Registered";
+
+
+                return View();
+            }
+
 
             if (file == null)
             {
@@ -116,6 +150,7 @@ namespace ProblemsBlog.Controllers
                 Session["UserId"] = loggedInUser.UserId.ToString();
                 Session["Username"] = loggedInUser.UserName;
                 Session["Author"] = loggedInUser.Name;
+                Session["Pass"] = loggedInUser.Password;
                 return RedirectToAction("UserProfile");
             }
             return View();
@@ -128,13 +163,18 @@ namespace ProblemsBlog.Controllers
             if (Session["UserId"] != null)
             {
                 //all user basic onfo
-                Models.User aUser = aManager.GetAllUserInfo(Convert.ToInt32(Session["UserId"]));
+                User aUser = aManager.GetAllUserInfo(Convert.ToInt32(Session["UserId"]));
                 ViewBag.User = aUser;
 
                 // all status from user db
                 ViewData["AllStatus"] = aManager.GetAllPostbyUserID(Convert.ToInt32(Session["UserId"]));
 
+                //latest post
+                ViewData["LatestPost"]=db.Post.OrderByDescending(p => p.Time).Take(3);
 
+                //admin message
+                 MessageToUser aMessageToUser =  db.TblToUser.FirstOrDefault();
+                ViewBag.MessageToUser = aMessageToUser;
 
                 return View();
             }
@@ -150,11 +190,22 @@ namespace ProblemsBlog.Controllers
             {
 
                 //all user basic onfo
-                Models.User aUser = aManager.GetAllUserInfo(Convert.ToInt32(Session["UserId"]));
+               User aUser = aManager.GetAllUserInfo(Convert.ToInt32(Session["UserId"]));
                 ViewBag.User = aUser;
 
                 // all status from user db
                 ViewData["AllStatus"] = aManager.GetAllPostbyUserID(Convert.ToInt32(Session["UserId"]));
+
+
+                //latest post
+                ViewData["LatestPost"] = db.Post.OrderByDescending(p => p.Time).Take(2);
+
+                //admin message
+                MessageToUser aMessageToUser = db.TblToUser.FirstOrDefault();
+                ViewBag.MessageToUser = aMessageToUser;
+
+
+
 
 
 
@@ -193,13 +244,14 @@ namespace ProblemsBlog.Controllers
 
         public ActionResult LogOut()
         {
-            FormsAuthentication.SignOut();
-            
+            Session.Clear();
+            Session.RemoveAll();
             Session.Abandon();
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.Cache.SetExpires(DateTime.Now.AddSeconds(-1));
+            Response.Cache.SetNoStore();
 
-            HttpCookie aCookie = new HttpCookie(FormsAuthentication.FormsCookieName, "");
-            aCookie.Expires = DateTime.Now.AddMonths(-5);
-            Response.Cookies.Add(aCookie);
+            FormsAuthentication.SignOut();
 
             return RedirectToAction("Login");
         }
@@ -207,16 +259,29 @@ namespace ProblemsBlog.Controllers
         // GET: /Registration/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+
+            int testid =Convert.ToInt32(Session["UserId"]) ;
+
+            if (id !=testid)
             {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.Users.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
+            
+           
+            
+           User user = db.Users.Find(id);
+
+           if (user == null)
+           {
+               return HttpNotFound();
+           }
+           return View(user);
+
+         
         }
 
         // POST: /Registration/Edit/5
@@ -226,14 +291,18 @@ namespace ProblemsBlog.Controllers
         public ActionResult Edit(User user, HttpPostedFileBase file)
         {
             
-            string filename = System.IO.Path.GetFileName(file.FileName);
-
-            /*Saving the file in server folder*/
-            file.SaveAs(Server.MapPath("~/Images/" + filename));
-
-            user.Image = "Images/" + filename;
             
-          
+           
+            if (file != null)
+            {
+                string filename = System.IO.Path.GetFileName(file.FileName);
+
+                /*Saving the file in server folder*/
+                file.SaveAs(Server.MapPath("~/Images/" + filename));
+
+                user.Image = "Images/" + filename;
+            }
+
             if (ModelState.IsValid)
             {
                 db.Entry(user).State = EntityState.Modified;
@@ -241,6 +310,38 @@ namespace ProblemsBlog.Controllers
                 return RedirectToAction("UserProfile");
             }
             return View(user);
+        }
+
+        public ActionResult ContactToAdmin()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ContactToAdmin( MessageToAdmin userMessageToAdmin)
+        {
+            if (Session["UserId"]!=null)
+            {
+                userMessageToAdmin.UserName = Session["Username"].ToString();
+                userMessageToAdmin.UserId = Convert.ToInt32(Session["UserId"]);
+                
+            }
+            userMessageToAdmin.UserName = "Guest";
+            userMessageToAdmin.Time = DateTime.Now;
+
+            if (ModelState.IsValid)
+            {
+                db.TblFromUser.Add(userMessageToAdmin);
+                db.SaveChanges();
+                if (Session["UserId"] != null)
+                {
+                    return RedirectToAction("UserHome", "Post");
+                }
+                return RedirectToAction("Home","Post");
+
+            }
+
+            return View(userMessageToAdmin);
         }
 
         // GET: /Registration/Delete/5

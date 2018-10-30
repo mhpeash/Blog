@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+using System.Web.Mvc;
 
 namespace ProblemsBlog.Models
 {
@@ -16,8 +14,13 @@ namespace ProblemsBlog.Models
         public string UserName { get; set; }
 
         [Required]
-        [DataType(DataType.MultilineText)]
+        [AllowHtml]
         [Display(Name = "Your Comment")]
         public string UserComment { get; set; }
+
+        public DateTime Time { get; set; }
+
+ 
+
     }
 }

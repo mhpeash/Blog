@@ -40,6 +40,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -161,6 +167,7 @@
     <Compile Include="Context\DatabaseContext.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
+    <Compile Include="Controllers\SettingsAdminController.cs" />
     <Compile Include="Core\BLL\UserManager.cs" />
     <Compile Include="Core\DAL\UserGateway.cs" />
     <Compile Include="Global.asax.cs">
@@ -178,9 +185,57 @@
     <Compile Include="Migrations\201611291425257_changepostcontentamount.Designer.cs">
       <DependentUpon>201611291425257_changepostcontentamount.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612110741374_addnewmceeditor.cs" />
+    <Compile Include="Migrations\201612110741374_addnewmceeditor.Designer.cs">
+      <DependentUpon>201612110741374_addnewmceeditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612110828041_allowhtmltomodel.cs" />
+    <Compile Include="Migrations\201612110828041_allowhtmltomodel.Designer.cs">
+      <DependentUpon>201612110828041_allowhtmltomodel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612110852533_testforremovedatatypeinmodel.cs" />
+    <Compile Include="Migrations\201612110852533_testforremovedatatypeinmodel.Designer.cs">
+      <DependentUpon>201612110852533_testforremovedatatypeinmodel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612161515205_joinwithuserandcomment.cs" />
+    <Compile Include="Migrations\201612161515205_joinwithuserandcomment.Designer.cs">
+      <DependentUpon>201612161515205_joinwithuserandcomment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612170833554_deletejoindbset.cs" />
+    <Compile Include="Migrations\201612170833554_deletejoindbset.Designer.cs">
+      <DependentUpon>201612170833554_deletejoindbset.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612181528278_addtimeincomment.cs" />
+    <Compile Include="Migrations\201612181528278_addtimeincomment.Designer.cs">
+      <DependentUpon>201612181528278_addtimeincomment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612220722197_addadminmodel.cs" />
+    <Compile Include="Migrations\201612220722197_addadminmodel.Designer.cs">
+      <DependentUpon>201612220722197_addadminmodel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612220829291_changepasswordtype.cs" />
+    <Compile Include="Migrations\201612220829291_changepasswordtype.Designer.cs">
+      <DependentUpon>201612220829291_changepasswordtype.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612220937384_deletetimefromadminmodel.cs" />
+    <Compile Include="Migrations\201612220937384_deletetimefromadminmodel.Designer.cs">
+      <DependentUpon>201612220937384_deletetimefromadminmodel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612221138225_addallmessagemodel.cs" />
+    <Compile Include="Migrations\201612221138225_addallmessagemodel.Designer.cs">
+      <DependentUpon>201612221138225_addallmessagemodel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701031630525_addemailmessagetoadminclass.cs" />
+    <Compile Include="Migrations\201701031630525_addemailmessagetoadminclass.Designer.cs">
+      <DependentUpon>201701031630525_addemailmessagetoadminclass.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AdminControl.cs" />
     <Compile Include="Models\Comment.cs" />
+    <Compile Include="Models\MessageToAdmin.cs" />
+    <Compile Include="Models\MessageToUser.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserJoinComment.cs" />
     <Compile Include="Models\UserPost.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -190,12 +245,14 @@
     <Content Include="Content\blog-post.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\hekkurdiary.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -208,7 +265,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -235,8 +294,22 @@
     <Content Include="Views\Post\Index.cshtml" />
     <Content Include="Views\Post\Home.cshtml" />
     <Content Include="Views\Post\UserHome.cshtml" />
+    <Content Include="Views\Post\UserSinglePostDetails.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\tinymce_jquery_full.cshtml" />
+    <Content Include="Views\Registration\RegsteredUserInfo.cshtml" />
+    <Content Include="Views\Post\Searching.cshtml" />
+    <Content Include="Views\SettingsAdmin\Create.cshtml" />
+    <Content Include="Views\SettingsAdmin\Login.cshtml" />
+    <Content Include="Views\SettingsAdmin\AdminWorld.cshtml" />
+    <Content Include="Views\SettingsAdmin\EditInfo.cshtml" />
+    <Content Include="Views\SettingsAdmin\PostDetails.cshtml" />
+    <Content Include="Views\SettingsAdmin\SingleUserPost.cshtml" />
+    <Content Include="Views\Registration\ContactToAdmin.cshtml" />
+    <Content Include="Views\SettingsAdmin\CheckUserMessages.cshtml" />
+    <Content Include="Views\SettingsAdmin\PostReview.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="AdminFolder\" />
     <Folder Include="App_Data\" />
     <Folder Include="Images\" />
   </ItemGroup>
@@ -256,6 +329,39 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611291425257_changepostcontentamount.resx">
       <DependentUpon>201611291425257_changepostcontentamount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612110741374_addnewmceeditor.resx">
+      <DependentUpon>201612110741374_addnewmceeditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612110828041_allowhtmltomodel.resx">
+      <DependentUpon>201612110828041_allowhtmltomodel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612110852533_testforremovedatatypeinmodel.resx">
+      <DependentUpon>201612110852533_testforremovedatatypeinmodel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612161515205_joinwithuserandcomment.resx">
+      <DependentUpon>201612161515205_joinwithuserandcomment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612170833554_deletejoindbset.resx">
+      <DependentUpon>201612170833554_deletejoindbset.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612181528278_addtimeincomment.resx">
+      <DependentUpon>201612181528278_addtimeincomment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612220722197_addadminmodel.resx">
+      <DependentUpon>201612220722197_addadminmodel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612220829291_changepasswordtype.resx">
+      <DependentUpon>201612220829291_changepasswordtype.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612220937384_deletetimefromadminmodel.resx">
+      <DependentUpon>201612220937384_deletetimefromadminmodel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612221138225_addallmessagemodel.resx">
+      <DependentUpon>201612221138225_addallmessagemodel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701031630525_addemailmessagetoadminclass.resx">
+      <DependentUpon>201701031630525_addemailmessagetoadminclass.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
